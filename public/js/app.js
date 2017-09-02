@@ -53877,7 +53877,16 @@ var Card = function Card(card) {
   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
     "div",
     { className: "col-sm-6 col-md-4 col-lg-3 card" },
-    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: card.element.imageUrl })
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: card.element.imageUrl }),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      "div",
+      { className: "form-group" },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        "button",
+        { className: "btn btn-primary" },
+        "Add Card"
+      )
+    )
   );
 };
 
