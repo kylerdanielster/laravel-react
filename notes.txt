@@ -1,0 +1,168 @@
+Doing some rework using es6 and hopefully improving functionality
+New items found in src folder
+
+setup new laravel proj for react 
+php artisan preset react
+
+npm run dev
+It will compile all of our assets and put bundled javascript file into the public >> js  >>  app.js file.
+
+npm run watch
+It will watch the changes done in the assets folder and recompile automatically.
+
+new tutorial
+https://tighten.co/blog/react-101-building-a-gif-search-engine
+
+original tutorial
+https://html5hive.org/react-tutorial/
+
+Redux, a library that allows you to store the entire state of your 
+application within a single object tree
+
+One of the most important things to remember when you're working with React. 
+When you're initializing state in the constructor, you can set it directly with this.state = {}. 
+However, if you want to signal to React that the state has changed so that it knows to re-render, 
+you need to call this.setState() instead. 
+This means you should never call this.state = {} outside of a class constructor.
+
+When we need a way to pass data from a child component to its parent in React, 
+we do that through props -- data or callbacks passed from a parent component
+
+Any time a component’s state changes, its “render” function is called, updating the output. 
+In essence, each component “reacts” to changes, which is handy for any user interface. 
+Data stored in a state should be information that will be updated by the component’s event handlers 
+
+Any time a component’s state changes, its “render” function is called, updating the output. 
+In essence, each component “reacts” to changes, which is handy for any user interface. 
+Data stored in a state should be information that will be updated by the component’s event handlers
+
+The render method is that most-important method that produces the actual output, 
+and is normally placed last in the component.
+
+don’t include computed data in a state.
+
+Because we are dealing with states, we need to set an initial state so that the state 
+variables will always be available in the render method without errors. 
+This is why we use the getInitialState() method at the top of the component.
+
+The handleSubmit function is where we handle the pressing of the Save (or Remove) button. 
+We first have to call preventDefault() in order to prevent the form from being submitted 
+the normal way. We then process the data, so that the user will save the home if it’s 
+not already saved, or remove it from their saves if it is saved. 
+
+As soon as we save the new state at the end of the function, 
+the render method will be called automatically, which will update the display. 
+
+Components pass properties to their children components through the use of props. 
+One thing to keep in mind is that props should never be used to determine the state of a component. 
+A property would be something such as the address of a home, passed from the listing component to the 
+individual home component. 
+
+The state, on the other hand, should depend on data that may be updated, 
+such as the number of times people have saved the home.
+
+any custom attribute sent through when calling a child component may be accessed through this.props. 
+The most unique of these is this.props.children. The “children” property accesses whatever was 
+included within the opening and closing tags of the call to the component (not including the attributes).
+
+Notice in the call to the Card component that we include a “key” attribute, 
+as well as an “id” attribute with the same value. 
+The key is used internally by React, and is not available as a prop. 
+It allows React to keep track of components that may be shuffled or removed. 
+Since we also need some sort of id for our application, 
+we pass in a second “id” attribute with the same value, which may be used as a prop.
+
+Another change you would probably make when pulling “real” data from a database would be to 
+include whatever key is used to save a card in the database. 
+That key would be used when referencing the homes, as well as the save data for each card. 
+For now, we’re just counting on the JavaScript map method to give us array indexes that line up 
+between the two lists of cards and saves data, 
+simply because the arrays are in the correct order and the same size.
+
+the React method componentDidMount(). 
+This method is automatically called once when the component has finished rendering. 
+This is the perfect place to load our information. It’s also the best place to put 
+any polling function, such as the setInterval function, 
+for updating any changes to the saves in real time.
+
+Another thing that can be confusing to people is that attributes are not automatically 
+passed down to all the nested children when they are nested more than one level. 
+You’ll see that the function attribute passed to Card must also be passed down to the Saves component, 
+and it can have a completely different name! The same goes for all the other props.
+
+==========================================================
+Postgres NOTES
+Was missing the driver
+brew install php71-pdo-pgsql
+
+==> Installing php71-pdo-pgsql from homebrew/php
+==> Installing dependencies for homebrew/php/php71-pdo-pgsql: postgresql
+==> Installing homebrew/php/php71-pdo-pgsql dependency: postgresql
+==> Downloading https://homebrew.bintray.com/bottles/postgresql-9.6.5.sierra.bo
+######################################################################## 100.0%
+==> Pouring postgresql-9.6.5.sierra.bottle.tar.gz
+==> Caveats
+If builds of PostgreSQL 9 are failing and you have version 8.x installed,
+you may need to remove the previous version first. See:
+  https://github.com/Homebrew/legacy-homebrew/issues/2510
+
+To migrate existing data from a previous major version (pre-9.0) of PostgreSQL, see:
+  https://www.postgresql.org/docs/9.6/static/upgrading.html
+
+To migrate existing data from a previous minor version (9.0-9.5) of PostgreSQL, see:
+  https://www.postgresql.org/docs/9.6/static/pgupgrade.html
+
+  You will need your previous PostgreSQL installation from brew to perform `pg_upgrade`.
+  Do not run `brew cleanup postgresql` until you have performed the migration.
+
+To have launchd start postgresql now and restart at login:
+  brew services start postgresql
+Or, if you don't want/need a background service you can just run:
+  pg_ctl -D /usr/local/var/postgres start
+==> Summary
+🍺  /usr/local/Cellar/postgresql/9.6.5: 3,269 files, 36.7MB
+==> Installing homebrew/php/php71-pdo-pgsql
+==> Downloading https://homebrew.bintray.com/bottles-php/php71-pdo-pgsql-7.1.8_
+######################################################################## 100.0%
+==> Pouring php71-pdo-pgsql-7.1.8_15.sierra.bottle.tar.gz
+==> Caveats
+To finish installing pdo_pgsql for PHP 7.1:
+  * /usr/local/etc/php/7.1/conf.d/ext-pdo_pgsql.ini was created,
+    do not forget to remove it upon extension removal.
+  * Validate installation via one of the following methods:
+  *
+  * Using PHP from a webserver:
+  * - Restart your webserver.
+  * - Write a PHP page that calls "phpinfo();"
+  * - Load it in a browser and look for the info on the pdo_pgsql module.
+  * - If you see it, you have been successful!
+  *
+  * Using PHP from the command line:
+  * - Run `php -i "(command-line 'phpinfo()')"`
+  * - Look for the info on the pdo_pgsql module.
+  * - If you see it, you have been successful!
+==> Summary
+🍺  /usr/local/Cellar/php71-pdo-pgsql/7.1.8_15: 7 files, 181.2KB
+
+===================================================
+PHP Notes
+
+Useful - php -i | grep php.ini
+
+Maybe useful - which php
+
+This was odd - it was because I had .dll extension uncommented in the
+php.ini file and those are windows file. 
+
+php artisan migrate
+PHP Warning:  PHP Startup: Unable to load dynamic library './php_pdo_pgsql.dll' - dlopen(./php_pdo_pgsql.dll, 9): image not found in Unknown on line 0
+
+Warning: PHP Startup: Unable to load dynamic library './php_pdo_pgsql.dll' - dlopen(./php_pdo_pgsql.dll, 9): image not found in Unknown on line 0
+PHP Warning:  PHP Startup: Unable to load dynamic library './php_pgsql.dll' - dlopen(./php_pgsql.dll, 9): image not found in Unknown on line 0
+
+Warning: PHP Startup: Unable to load dynamic library './php_pgsql.dll' - dlopen(./php_pgsql.dll, 9): image not found in Unknown on line 0
+Migration table created successfully.
+Migrating: 2014_10_12_000000_create_users_table
+Migrated:  2014_10_12_000000_create_users_table
+Migrating: 2014_10_12_100000_create_password_resets_table
+Migrated:  2014_10_12_100000_create_password_resets_table
