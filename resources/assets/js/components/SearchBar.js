@@ -14,9 +14,8 @@ class SearchBar extends React.Component {
     }
 
   searchSubmit(e) {
-    //this.setState({name});
       e.preventDefault();
-      console.log(this.state.value); // from the parent
+      this.props.cardSearch(this.state.value);
   }
 
   // should contain search form

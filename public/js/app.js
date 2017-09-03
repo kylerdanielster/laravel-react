@@ -54057,9 +54057,8 @@ var SearchBar = function (_React$Component) {
   }, {
     key: 'searchSubmit',
     value: function searchSubmit(e) {
-      //this.setState({name});
       e.preventDefault();
-      console.log(this.state.value); // from the parent
+      this.props.cardSearch(this.state.value);
     }
 
     // should contain search form
