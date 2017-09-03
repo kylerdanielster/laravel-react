@@ -23,9 +23,8 @@ import SearchBar from './components/SearchBar';
 class App extends React.Component {
     constructor() {
         super();
-
         this.state = {
-            cards: [
+            results: [
                 {
                     id: 1,
                     name: 'Lightning Bolt',
@@ -58,9 +57,21 @@ class App extends React.Component {
                     imageUrl: 'http://via.placeholder.com/175x250',
                     saved: false
                 }
-            ]
-        }
+            ],
+            cube: [] // either poll server to update or update and save to server at the same time.
+        };
     }
+
+    // componentDidMount() {
+    //     fetch('/api/cube')
+    //         .then(response => {
+    //             return response.json();
+    //         })
+    //         .then(cube => {
+    //             this.setState({ cube });
+    //         });
+    // }
+    //TODO: Will need a load initial state function and a search function
 
     handleTermChange(term) {
         console.log(term);
@@ -72,7 +83,7 @@ class App extends React.Component {
 
                 <SearchBar onTermChange={this.handleTermChange} />
 
-                <CardList cards={this.state.cards} />
+                <CardList results={this.state.results} />
 
                 <h2 className="sub-header">Cube</h2>
                 <div className="table-responsive">
@@ -81,13 +92,13 @@ class App extends React.Component {
                         <tr>
                             <th>#</th>
                             <th>Name</th>
-                            <th>Header</th>
-                            <th>Header</th>
-                            <th>Header</th>
+                            <th>Type</th>
+                            <th>Colors</th>
+                            <th>Casting Cost</th>
                         </tr>
                         </thead>
 
-                            <CubeList cards={this.state.cards} />
+                            <CubeList cube={this.state.cube} />
 
                     </table>
                 </div>
@@ -98,4 +109,4 @@ class App extends React.Component {
     }
 }
 
-ReactDOM.render(<App />, document.getElementById('cardSearch'));
+ReactDOM.render(<App />, document.getElementById('cube'));

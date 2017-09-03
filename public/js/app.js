@@ -10441,7 +10441,7 @@ var App = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
 
         _this.state = {
-            cards: [{
+            results: [{
                 id: 1,
                 name: 'Lightning Bolt',
                 description: 'Lightning Bolt deals 3 damage to target creature or player.',
@@ -10469,10 +10469,22 @@ var App = function (_React$Component) {
                 //"photo": "https://img.scryfall.com/cards/small/en/m11/7.jpg?1496454118",
                 imageUrl: 'http://via.placeholder.com/175x250',
                 saved: false
-            }]
+            }],
+            cube: [] // either poll server to update or update and save to server at the same time.
         };
         return _this;
     }
+
+    // componentDidMount() {
+    //     fetch('/api/cube')
+    //         .then(response => {
+    //             return response.json();
+    //         })
+    //         .then(cube => {
+    //             this.setState({ cube });
+    //         });
+    // }
+    //TODO: Will need a load initial state function and a search function
 
     _createClass(App, [{
         key: 'handleTermChange',
@@ -10486,7 +10498,7 @@ var App = function (_React$Component) {
                 'div',
                 { className: 'top' },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_SearchBar__["a" /* default */], { onTermChange: this.handleTermChange }),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_CardList__["a" /* default */], { cards: this.state.cards }),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_CardList__["a" /* default */], { results: this.state.results }),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'h2',
                     { className: 'sub-header' },
@@ -10517,21 +10529,21 @@ var App = function (_React$Component) {
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'th',
                                     null,
-                                    'Header'
+                                    'Type'
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'th',
                                     null,
-                                    'Header'
+                                    'Colors'
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'th',
                                     null,
-                                    'Header'
+                                    'Casting Cost'
                                 )
                             )
                         ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_CubeList__["a" /* default */], { cards: this.state.cards })
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_CubeList__["a" /* default */], { cube: this.state.cube })
                     )
                 )
             );
@@ -10541,7 +10553,7 @@ var App = function (_React$Component) {
     return App;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
-__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(App, null), document.getElementById('cardSearch'));
+__WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(App, null), document.getElementById('cube'));
 
 /***/ }),
 /* 91 */
@@ -53881,7 +53893,7 @@ module.exports = ReactDOMInvalidARIAHook;
 */
 
 var CardList = function CardList(props) {
-  var cardItems = props.cards.map(function (card) {
+  var cardItems = props.results.map(function (card) {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Card__["a" /* default */], { key: card.id, element: card });
   });
 
@@ -54005,7 +54017,7 @@ var SearchBar = function (_React$Component) {
 
 
 var CubeList = function CubeList(props) {
-    var cardItems = props.cards.map(function (card) {
+    var cardItems = props.cube.map(function (card) {
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__CubeCard__["a" /* default */], { key: card.id, element: card });
     });
 
