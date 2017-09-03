@@ -18,7 +18,6 @@ class SearchBar extends React.Component {
       this.props.cardSearch(this.state.value);
   }
 
-  // should contain search form
   render() {
     return (
         <div className="search row col-md-12">

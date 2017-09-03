@@ -10403,6 +10403,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_CubeList__ = __webpack_require__(217);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_CardList__ = __webpack_require__(219);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_SearchBar__ = __webpack_require__(221);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_axios__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_axios__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10424,6 +10426,8 @@ __webpack_require__(91);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+
 
 
 
@@ -10475,6 +10479,7 @@ var App = function (_React$Component) {
         return _this;
     }
 
+    //TODO: Will need to load cube initial state
     // componentDidMount() {
     //     fetch('/api/cube')
     //         .then(response => {
@@ -10484,19 +10489,37 @@ var App = function (_React$Component) {
     //             this.setState({ cube });
     //         });
     // }
-    //TODO: Will need a load initial state function and a search function
+
+    //TODO: call search API endpoint and update results in state
+
 
     _createClass(App, [{
-        key: 'handleTermChange',
-        value: function handleTermChange(term) {
-            console.log(term);
-        }
-    }, {
         key: 'cardSearchAPI',
         value: function cardSearchAPI(name) {
-            //TODO: call scryfall and update cube in state
             console.log(name);
+            // const url = `https://api.scryfall.com/cards/named?fuzzy=${name.replace(/\s/g, '+')}`;
+
+            //TODO: axios or fetch? axios seems like the more common/better choice
+
+            // axios.get('api/search/name')
+            //     .then(res => {
+            //         const cube = res.data.data.children.map(obj => obj.data);
+            //         this.setState({ cube });
+            //     });
+
+            // fetch('api/search/name').then(response => {
+            //     return response.json();
+            // }).then(cube => {
+            //     this.setState({cube});
+            // });
         }
+    }, {
+        key: 'addToCube',
+        value: function addToCube(card) {}
+        //TODO: add card from results to cube
+
+        // chould pass 'this.state.results' to CubeList to see how the component looks when populated
+
     }, {
         key: 'render',
         value: function render() {
@@ -10504,7 +10527,7 @@ var App = function (_React$Component) {
                 'div',
                 { className: 'top' },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_SearchBar__["a" /* default */], { cardSearch: this.cardSearchAPI }),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_CardList__["a" /* default */], { results: this.state.results }),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_CardList__["a" /* default */], { addToCube: this.addToCube, cube: this.state.cube, results: this.state.results }),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'h2',
                     { className: 'sub-header' },
@@ -53884,6 +53907,9 @@ module.exports = ReactDOMInvalidARIAHook;
 
 
 
+// TODO: This is no longer going to be able to be stateless
+// TODO: Can/Should I move the buttons to this level?
+
 var CubeList = function CubeList(props) {
     var cardItems = props.cube.map(function (card) {
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__CubeCard__["a" /* default */], { key: card.id, element: card });
@@ -53975,6 +54001,9 @@ var CubeCard = function CubeCard(card) {
  you should give each a unique key
 */
 
+// TODO: This is no longer going to be able to be stateless
+// TODO: Can/Should I move the buttons to this level?
+
 var CardList = function CardList(props) {
   var cardItems = props.results.map(function (card) {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Card__["a" /* default */], { key: card.id, element: card });
@@ -54060,9 +54089,6 @@ var SearchBar = function (_React$Component) {
       e.preventDefault();
       this.props.cardSearch(this.state.value);
     }
-
-    // should contain search form
-
   }, {
     key: 'render',
     value: function render() {

@@ -20,6 +20,8 @@ import CubeList from './components/CubeList';
 import CardList from './components/CardList';
 import SearchBar from './components/SearchBar';
 
+import axios from 'axios';
+
 class App extends React.Component {
     constructor() {
         super();
@@ -62,6 +64,7 @@ class App extends React.Component {
         };
     }
 
+    //TODO: Will need to load cube initial state
     // componentDidMount() {
     //     fetch('/api/cube')
     //         .then(response => {
@@ -71,24 +74,38 @@ class App extends React.Component {
     //             this.setState({ cube });
     //         });
     // }
-    //TODO: Will need a load initial state function and a search function
 
-    handleTermChange(term) {
-        console.log(term);
-    }
-
+    //TODO: call search API endpoint and update results in state
     cardSearchAPI(name){
-        //TODO: call scryfall and update cube in state
         console.log(name);
+        // const url = `https://api.scryfall.com/cards/named?fuzzy=${name.replace(/\s/g, '+')}`;
+
+        //TODO: axios or fetch? axios seems like the more common/better choice
+
+        // axios.get('api/search/name')
+        //     .then(res => {
+        //         const cube = res.data.data.children.map(obj => obj.data);
+        //         this.setState({ cube });
+        //     });
+
+        // fetch('api/search/name').then(response => {
+        //     return response.json();
+        // }).then(cube => {
+        //     this.setState({cube});
+        // });
     }
 
+    addToCube(card){
+        //TODO: add card from results to cube
+    }
+    // chould pass 'this.state.results' to CubeList to see how the component looks when populated
     render() {
         return (
             <div className="top">
 
                 <SearchBar cardSearch={this.cardSearchAPI} />
 
-                <CardList results={this.state.results} />
+                <CardList addToCube={this.addToCube} cube={this.state.cube} results={this.state.results} />
 
                 <h2 className="sub-header">Cube</h2>
                 <div className="table-responsive">
