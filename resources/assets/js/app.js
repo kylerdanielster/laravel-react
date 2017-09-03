@@ -13,10 +13,8 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-//require('./components/Example');
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import registerServiceWorker from './registerServiceWorker';
 
 import CubeList from './components/CubeList';
 import CardList from './components/CardList';
@@ -71,15 +69,18 @@ class App extends React.Component {
     render() {
         return (
             <div className="top">
+
                 <SearchBar onTermChange={this.handleTermChange} />
+
                 <CardList cards={this.state.cards} />
+
                 <h2 className="sub-header">Cube</h2>
                 <div className="table-responsive">
                     <table className="table table-striped">
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Header</th>
+                            <th>Name</th>
                             <th>Header</th>
                             <th>Header</th>
                             <th>Header</th>
@@ -98,5 +99,3 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, document.getElementById('cardSearch'));
-//registerServiceWorker();
-

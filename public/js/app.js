@@ -10425,10 +10425,8 @@ __webpack_require__(91);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-//require('./components/Example');
 
 
-//import registerServiceWorker from './registerServiceWorker';
 
 
 
@@ -10514,7 +10512,7 @@ var App = function (_React$Component) {
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'th',
                                     null,
-                                    'Header'
+                                    'Name'
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'th',
@@ -10544,7 +10542,6 @@ var App = function (_React$Component) {
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
 __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(App, null), document.getElementById('cardSearch'));
-//registerServiceWorker();
 
 /***/ }),
 /* 91 */
