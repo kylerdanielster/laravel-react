@@ -3,19 +3,30 @@ import React from 'react';
 class SearchBar extends React.Component {
   constructor() {
     super();
-    this.state = { term: '' }
+      this.state = {value: ''};
+
+      this.handleChange = this.handleChange.bind(this);
+      this.searchSubmit = this.searchSubmit.bind(this);
   }
 
-  onInputChange(term) {
-    this.setState({term});
-    // <SearchBar onTermChange={this.handleTermChange} /> in App component
-    this.props.onTermChange(term); // from the parent 
+    handleChange(event) {
+        this.setState({value: event.target.value});
+    }
+
+  searchSubmit(e) {
+    //this.setState({name});
+      e.preventDefault();
+      console.log(this.state.value); // from the parent
   }
 
+  // should contain search form
   render() {
     return (
         <div className="search row col-md-12">
-            <input onChange={event => this.onInputChange(event.target.value)} />
+          <form onSubmit={this.searchSubmit}>
+            <input type="text" value={this.state.value} onChange={this.handleChange} />
+            <button>Search</button>
+          </form>
         </div>
     );
   }

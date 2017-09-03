@@ -77,11 +77,16 @@ class App extends React.Component {
         console.log(term);
     }
 
+    cardSearchAPI(name){
+        //TODO: call scryfall and update cube in state
+        console.log(name);
+    }
+
     render() {
         return (
             <div className="top">
 
-                <SearchBar onTermChange={this.handleTermChange} />
+                <SearchBar cardSearch={this.cardSearchAPI} />
 
                 <CardList results={this.state.results} />
 
