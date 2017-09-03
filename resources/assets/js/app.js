@@ -18,6 +18,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 //import registerServiceWorker from './registerServiceWorker';
 
+import CubeList from './components/CubeList';
 import CardList from './components/CardList';
 import SearchBar from './components/SearchBar';
 
@@ -72,7 +73,26 @@ class App extends React.Component {
             <div className="top">
                 <SearchBar onTermChange={this.handleTermChange} />
                 <CardList cards={this.state.cards} />
+                <h2 className="sub-header">Cube</h2>
+                <div className="table-responsive">
+                    <table className="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Header</th>
+                            <th>Header</th>
+                            <th>Header</th>
+                            <th>Header</th>
+                        </tr>
+                        </thead>
+
+                            <CubeList cards={this.state.cards} />
+
+                    </table>
+                </div>
             </div>
+
+
         );
     }
 }
