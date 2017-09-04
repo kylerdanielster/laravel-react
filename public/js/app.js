@@ -10450,6 +10450,9 @@ var App = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
 
+        _this.addToCube = _this.addToCube.bind(_this);
+        _this.removeFromCube = _this.removeFromCube.bind(_this);
+
         _this.state = {
             results: [{
                 id: 1,
@@ -10522,12 +10525,25 @@ var App = function (_React$Component) {
     }, {
         key: 'addToCube',
         value: function addToCube(card) {
-            console.log(card + ' added');
+            console.log(card.name + ' added');
+            this.setState(function (prevState) {
+                return {
+                    cube: prevState.cube.concat(card)
+                };
+            });
         }
     }, {
         key: 'removeFromCube',
         value: function removeFromCube(card) {
             console.log(card + ' removed');
+            this.setState(function (prevState) {
+                return {
+                    cube: prevState.cube.filter(function (element) {
+                        return element.name !== card;
+                    })
+                };
+            });
+            console.log(this.state.cube);
         }
 
         // could pass 'this.state.results' to CubeList to see how the component looks when populated
@@ -10584,7 +10600,7 @@ var App = function (_React$Component) {
                                 )
                             )
                         ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_CubeList__["a" /* default */], { removeCard: this.removeFromCube, cube: this.state.results })
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_CubeList__["a" /* default */], { removeCard: this.removeFromCube, cube: this.state.cube })
                     )
                 )
             );
@@ -54097,7 +54113,7 @@ var Card = function (_React$Component) {
         value: function addCard(e) {
             e.preventDefault();
             //console.log('added');
-            this.props.addCard(this.props.element.name);
+            this.props.addCard(this.props.element);
         }
     }, {
         key: "render",

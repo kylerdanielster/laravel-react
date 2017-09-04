@@ -25,6 +25,10 @@ import axios from 'axios';
 class App extends React.Component {
     constructor() {
         super();
+
+        this.addToCube = this.addToCube.bind(this);
+        this.removeFromCube = this.removeFromCube.bind(this);
+
         this.state = {
             results: [
                 {
@@ -96,11 +100,18 @@ class App extends React.Component {
     }
 
     addToCube(card){
-        console.log(card + ' added');
+        console.log(card.name + ' added');
+        this.setState(prevState => ({
+            cube: prevState.cube.concat(card)
+        }));
     }
 
     removeFromCube(card){
         console.log(card + ' removed');
+        this.setState(prevState => ({
+            cube: prevState.cube.filter(element => element.name !== card)
+        }));
+        console.log(this.state.cube);
     }
 
     // could pass 'this.state.results' to CubeList to see how the component looks when populated
@@ -125,7 +136,7 @@ class App extends React.Component {
                         </tr>
                         </thead>
 
-                            <CubeList removeCard={this.removeFromCube} cube={this.state.results} />
+                            <CubeList removeCard={this.removeFromCube} cube={this.state.cube} />
 
                     </table>
                 </div>

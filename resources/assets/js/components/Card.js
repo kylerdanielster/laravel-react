@@ -10,7 +10,7 @@ class Card extends React.Component {
     addCard(e){
         e.preventDefault();
         //console.log('added');
-        this.props.addCard(this.props.element.name);
+        this.props.addCard(this.props.element);
     }
     render() {
         return (
