@@ -28,75 +28,66 @@ class App extends React.Component {
 
         this.addToCube = this.addToCube.bind(this);
         this.removeFromCube = this.removeFromCube.bind(this);
+        this.cardSearchAPI = this.cardSearchAPI.bind(this);
 
+        // Going to leave test data for now
         this.state = {
             results: [
-                {
-                    id: 1,
-                    name: 'Lightning Bolt',
-                    description: 'Lightning Bolt deals 3 damage to target creature or player.',
-                    //"photo": "https://img.scryfall.com/cards/small/en/mm2/122.jpg?1496792177",
-                    imageUrl: 'http://via.placeholder.com/175x250',
-                    saved: false
-                },
-                {
-                    id: 2,
-                    name: 'Terminate',
-                    description: 'Destroy target creature. It can\'t be regenerated.',
-                    //"photo": "https://img.scryfall.com/cards/small/en/mm3/194.jpg?1501890996",
-                    imageUrl: 'http://via.placeholder.com/175x250',
-                    saved: false
-                },
-                {
-                    id: 3,
-                    name: 'Thoughtseize',
-                    description: 'Target player reveals his or her hand. You choose a nonland card from it. That player discards that card. You lose 2 life.',
-                    //"photo": "https://img.scryfall.com/cards/small/en/ths/107.jpg?1497078879",
-                    imageUrl: 'http://via.placeholder.com/175x250',
-                    saved: false
-                },
-                {
-                    id: 4,
-                    name: 'Baneslayer Angel',
-                    description: 'Flying, first strike, lifelink, protection from Demons and from Dragons.',
-                    //"photo": "https://img.scryfall.com/cards/small/en/m11/7.jpg?1496454118",
-                    imageUrl: 'http://via.placeholder.com/175x250',
-                    saved: false
-                }
+                // {
+                //     id: 1,
+                //     name: 'Lightning Bolt',
+                //     description: 'Lightning Bolt deals 3 damage to target creature or player.',
+                //     //"photo": "https://img.scryfall.com/cards/small/en/mm2/122.jpg?1496792177",
+                //     imageUrl: 'http://via.placeholder.com/175x250',
+                //     saved: false
+                // },
+                // {
+                //     id: 2,
+                //     name: 'Terminate',
+                //     description: 'Destroy target creature. It can\'t be regenerated.',
+                //     //"photo": "https://img.scryfall.com/cards/small/en/mm3/194.jpg?1501890996",
+                //     imageUrl: 'http://via.placeholder.com/175x250',
+                //     saved: false
+                // },
+                // {
+                //     id: 3,
+                //     name: 'Thoughtseize',
+                //     description: 'Target player reveals his or her hand. You choose a nonland card from it. That player discards that card. You lose 2 life.',
+                //     //"photo": "https://img.scryfall.com/cards/small/en/ths/107.jpg?1497078879",
+                //     imageUrl: 'http://via.placeholder.com/175x250',
+                //     saved: false
+                // },
+                // {
+                //     id: 4,
+                //     name: 'Baneslayer Angel',
+                //     description: 'Flying, first strike, lifelink, protection from Demons and from Dragons.',
+                //     //"photo": "https://img.scryfall.com/cards/small/en/m11/7.jpg?1496454118",
+                //     imageUrl: 'http://via.placeholder.com/175x250',
+                //     saved: false
+                // }
             ],
             cube: []
         };
     }
 
-    //TODO: Will need to load cube initial state, again axios or fetch?
+    //TODO: Will need to load cube initial state for users cube, auth...
     // componentDidMount() {
-    //     fetch('/api/cube')
-    //         .then(response => {
-    //             return response.json();
-    //         })
-    //         .then(cube => {
-    //             this.setState({ cube });
+    //     axios.get('api/cube')
+    //         .then(res => {
+    //             console.log(res.data);
+    //             this.setState({ cube: res.cube });
     //         });
     // }
 
-    //TODO: call search API endpoint and update results in state
     cardSearchAPI(name){
         console.log(name);
-        //const url = `https://api.scryfall.com/cards/named?fuzzy=${name.replace(/\s/g, '+')}`;
+        const val = name.replace(/\s/g, '+');
 
-        //TODO: axios or fetch? axios seems like the more common/better choice
-
-        // axios.get('api/search/name')
-        //     .then(res => {
-        //         const cube = res.data.data.children.map(obj => obj.data);
-        //         this.setState({ cube });
-        //     });
-
-        // fetch('api/search/name').then(response => {
-        //     return response.json();
-        // }).then(cube => {
-        //     this.setState({cube});
-        // });
+        axios.get('api/search/' + val)
+            .then(res => {
+                console.log(res.data);
+                this.setState({ results: res.data });
+            });
     }
 
     // TODO: update database
@@ -116,12 +107,23 @@ class App extends React.Component {
     }
 
     render() {
+        let searchResults;
+        if (this.state.results.length === 0) {
+            searchResults = '';
+
+        } else {
+            searchResults = <CardList addCard={this.addToCube}
+                        cube={this.state.cube}
+                        results={this.state.results}
+                        />;
+        }
+
         return (
             <div className="top">
 
                 <SearchBar cardSearch={this.cardSearchAPI} />
 
-                <CardList addCard={this.addToCube} cube={this.state.cube} results={this.state.results} />
+                {searchResults}
 
                 <h2 className="sub-header">Cube</h2>
                 <div className="table-responsive">
@@ -136,7 +138,9 @@ class App extends React.Component {
                         </tr>
                         </thead>
 
-                            <CubeList removeCard={this.removeFromCube} cube={this.state.cube} />
+                            <CubeList removeCard={this.removeFromCube}
+                                      cube={this.state.cube}
+                            />
 
                     </table>
                 </div>

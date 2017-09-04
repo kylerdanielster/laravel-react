@@ -3,7 +3,10 @@ import CubeCard from './CubeCard';
 
 const CubeList = (props) => {
     const cardItems = props.cube.map((card) => {
-        return <CubeCard removeCard={props.removeCard} key={card.id} element={card} />
+        return <CubeCard removeCard={props.removeCard}
+            key={card.id}
+            element={card}
+        />
     });
 
     return (

@@ -9,7 +9,6 @@ class CubeCard extends React.Component {
 
     removeCard(e){
         e.preventDefault();
-        //console.log('removed');
         this.props.removeCard(this.props.element.name);
     }
 
@@ -26,8 +25,7 @@ class CubeCard extends React.Component {
                         type="submit"
                         className="btn btn-primary"
                         onClick={this.removeCard}
-                    >
-                        Remove Card</button>
+                    >Remove Card</button>
                 </td>
             </tr>
         )

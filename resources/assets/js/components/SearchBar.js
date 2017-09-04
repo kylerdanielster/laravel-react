@@ -1,33 +1,37 @@
 import React from 'react';
 
 class SearchBar extends React.Component {
-  constructor() {
-    super();
-      this.state = {value: ''};
+    constructor() {
+        super();
+        this.state = {value: 'brainstorm'};
 
-      this.handleChange = this.handleChange.bind(this);
-      this.searchSubmit = this.searchSubmit.bind(this);
-  }
+        this.handleChange = this.handleChange.bind(this);
+        this.searchSubmit = this.searchSubmit.bind(this);
+    }
 
     handleChange(event) {
         this.setState({value: event.target.value});
     }
 
-  searchSubmit(e) {
-      e.preventDefault();
-      this.props.cardSearch(this.state.value);
-  }
+    searchSubmit(e) {
+        e.preventDefault();
+        this.props.cardSearch(this.state.value);
+    }
 
-  render() {
-    return (
-        <div className="search row col-md-12">
-          <form onSubmit={this.searchSubmit}>
-            <input type="text" value={this.state.value} onChange={this.handleChange} required />
-            <button type="submit" >Search</button>
-          </form>
-        </div>
-    );
-  }
+    render() {
+        return (
+            <div className="search row col-md-12">
+                <form onSubmit={this.searchSubmit}>
+                    <input type="text"
+                           value={this.state.value}
+                           onChange={this.handleChange}
+                           required
+                    />
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        );
+    }
 }
 
 export default SearchBar;

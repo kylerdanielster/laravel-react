@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use GuzzleHttp\Client as GuzzleHttpClient;;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,14 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+// Leaving the request object for now, I may want this to be a post endpoint
+Route::get('/search/{name}', function (Request $request, $name) {
+    $client = new GuzzleHttpClient();
+
+    $response = $client->request('GET',
+        'https://api.scryfall.com/cards/named?fuzzy=' . $name);
+
+    return $response->getBody();
 });

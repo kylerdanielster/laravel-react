@@ -10452,76 +10452,74 @@ var App = function (_React$Component) {
 
         _this.addToCube = _this.addToCube.bind(_this);
         _this.removeFromCube = _this.removeFromCube.bind(_this);
+        _this.cardSearchAPI = _this.cardSearchAPI.bind(_this);
 
+        // Going to leave test data for now
         _this.state = {
-            results: [{
-                id: 1,
-                name: 'Lightning Bolt',
-                description: 'Lightning Bolt deals 3 damage to target creature or player.',
-                //"photo": "https://img.scryfall.com/cards/small/en/mm2/122.jpg?1496792177",
-                imageUrl: 'http://via.placeholder.com/175x250',
-                saved: false
-            }, {
-                id: 2,
-                name: 'Terminate',
-                description: 'Destroy target creature. It can\'t be regenerated.',
-                //"photo": "https://img.scryfall.com/cards/small/en/mm3/194.jpg?1501890996",
-                imageUrl: 'http://via.placeholder.com/175x250',
-                saved: false
-            }, {
-                id: 3,
-                name: 'Thoughtseize',
-                description: 'Target player reveals his or her hand. You choose a nonland card from it. That player discards that card. You lose 2 life.',
-                //"photo": "https://img.scryfall.com/cards/small/en/ths/107.jpg?1497078879",
-                imageUrl: 'http://via.placeholder.com/175x250',
-                saved: false
-            }, {
-                id: 4,
-                name: 'Baneslayer Angel',
-                description: 'Flying, first strike, lifelink, protection from Demons and from Dragons.',
-                //"photo": "https://img.scryfall.com/cards/small/en/m11/7.jpg?1496454118",
-                imageUrl: 'http://via.placeholder.com/175x250',
-                saved: false
-            }],
-            cube: [] // either poll server to update or update and save to server at the same time.
+            results: [
+                // {
+                //     id: 1,
+                //     name: 'Lightning Bolt',
+                //     description: 'Lightning Bolt deals 3 damage to target creature or player.',
+                //     //"photo": "https://img.scryfall.com/cards/small/en/mm2/122.jpg?1496792177",
+                //     imageUrl: 'http://via.placeholder.com/175x250',
+                //     saved: false
+                // },
+                // {
+                //     id: 2,
+                //     name: 'Terminate',
+                //     description: 'Destroy target creature. It can\'t be regenerated.',
+                //     //"photo": "https://img.scryfall.com/cards/small/en/mm3/194.jpg?1501890996",
+                //     imageUrl: 'http://via.placeholder.com/175x250',
+                //     saved: false
+                // },
+                // {
+                //     id: 3,
+                //     name: 'Thoughtseize',
+                //     description: 'Target player reveals his or her hand. You choose a nonland card from it. That player discards that card. You lose 2 life.',
+                //     //"photo": "https://img.scryfall.com/cards/small/en/ths/107.jpg?1497078879",
+                //     imageUrl: 'http://via.placeholder.com/175x250',
+                //     saved: false
+                // },
+                // {
+                //     id: 4,
+                //     name: 'Baneslayer Angel',
+                //     description: 'Flying, first strike, lifelink, protection from Demons and from Dragons.',
+                //     //"photo": "https://img.scryfall.com/cards/small/en/m11/7.jpg?1496454118",
+                //     imageUrl: 'http://via.placeholder.com/175x250',
+                //     saved: false
+                // }
+            ],
+            cube: []
         };
         return _this;
     }
 
-    //TODO: Will need to load cube initial state, again axios or fetch?
+    //TODO: Will need to load cube initial state for users cube, auth...
     // componentDidMount() {
-    //     fetch('/api/cube')
-    //         .then(response => {
-    //             return response.json();
-    //         })
-    //         .then(cube => {
-    //             this.setState({ cube });
+    //     axios.get('api/cube')
+    //         .then(res => {
+    //             console.log(res.data);
+    //             this.setState({ cube: res.cube });
     //         });
     // }
-
-    //TODO: call search API endpoint and update results in state
-
 
     _createClass(App, [{
         key: 'cardSearchAPI',
         value: function cardSearchAPI(name) {
+            var _this2 = this;
+
             console.log(name);
-            //const url = `https://api.scryfall.com/cards/named?fuzzy=${name.replace(/\s/g, '+')}`;
+            var val = name.replace(/\s/g, '+');
 
-            //TODO: axios or fetch? axios seems like the more common/better choice
-
-            // axios.get('api/search/name')
-            //     .then(res => {
-            //         const cube = res.data.data.children.map(obj => obj.data);
-            //         this.setState({ cube });
-            //     });
-
-            // fetch('api/search/name').then(response => {
-            //     return response.json();
-            // }).then(cube => {
-            //     this.setState({cube});
-            // });
+            __WEBPACK_IMPORTED_MODULE_5_axios___default.a.get('api/search/' + val).then(function (res) {
+                console.log(res.data);
+                _this2.setState({ results: res.data });
+            });
         }
+
+        // TODO: update database
+
     }, {
         key: 'addToCube',
         value: function addToCube(card) {
@@ -10532,6 +10530,9 @@ var App = function (_React$Component) {
                 };
             });
         }
+
+        // TODO: update database
+
     }, {
         key: 'removeFromCube',
         value: function removeFromCube(card) {
@@ -10543,19 +10544,25 @@ var App = function (_React$Component) {
                     })
                 };
             });
-            console.log(this.state.cube);
         }
-
-        // could pass 'this.state.results' to CubeList to see how the component looks when populated
-
     }, {
         key: 'render',
         value: function render() {
+            var searchResults = void 0;
+            if (this.state.results.length === 0) {
+                searchResults = '';
+            } else {
+                searchResults = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_CardList__["a" /* default */], { addCard: this.addToCube,
+                    cube: this.state.cube,
+                    results: this.state.results
+                });
+            }
+
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 { className: 'top' },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_SearchBar__["a" /* default */], { cardSearch: this.cardSearchAPI }),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_CardList__["a" /* default */], { addCard: this.addToCube, cube: this.state.cube, results: this.state.results }),
+                searchResults,
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'h2',
                     { className: 'sub-header' },
@@ -10600,7 +10607,9 @@ var App = function (_React$Component) {
                                 )
                             )
                         ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_CubeList__["a" /* default */], { removeCard: this.removeFromCube, cube: this.state.cube })
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_CubeList__["a" /* default */], { removeCard: this.removeFromCube,
+                            cube: this.state.cube
+                        })
                     )
                 )
             );
@@ -53929,12 +53938,12 @@ module.exports = ReactDOMInvalidARIAHook;
 
 
 
-// TODO: This is no longer going to be able to be stateless (wrong?)
-// TODO: Can/Should I move the buttons to this level? (no make child components class components?)
-
 var CubeList = function CubeList(props) {
     var cardItems = props.cube.map(function (card) {
-        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__CubeCard__["a" /* default */], { removeCard: props.removeCard, key: card.id, element: card });
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__CubeCard__["a" /* default */], { removeCard: props.removeCard,
+            key: card.id,
+            element: card
+        });
     });
 
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -53979,7 +53988,6 @@ var CubeCard = function (_React$Component) {
         key: "removeCard",
         value: function removeCard(e) {
             e.preventDefault();
-            //console.log('removed');
             this.props.removeCard(this.props.element.name);
         }
     }, {
@@ -54062,19 +54070,23 @@ var CubeCard = function (_React$Component) {
  you should give each a unique key
 */
 
-// TODO: This is no longer going to be able to be stateless (wrong?)
-// TODO: Can/Should I move the buttons to this level? (no make child components class components?)
-
 var CardList = function CardList(props) {
-  var cardItems = props.results.map(function (card) {
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Card__["a" /* default */], { addCard: props.addCard, key: card.id, element: card });
-  });
+    // Leaving this for the moment. May need to handle multiple results
 
-  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-    'div',
-    { className: 'row cards' },
-    cardItems
-  );
+    // const cardItems = props.results.map((card) => {
+    //   return <Card addCard={props.addCard} key={card.id} element={card} />
+    // });
+    // return ( <div> {cardItems} </div> );
+
+
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'row cards' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Card__["a" /* default */], { addCard: props.addCard,
+            key: props.results.id,
+            element: props.results
+        })
+    );
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (CardList);
@@ -54112,7 +54124,6 @@ var Card = function (_React$Component) {
         key: "addCard",
         value: function addCard(e) {
             e.preventDefault();
-            //console.log('added');
             this.props.addCard(this.props.element);
         }
     }, {
@@ -54121,13 +54132,16 @@ var Card = function (_React$Component) {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 "div",
                 { className: "col-sm-6 col-md-4 col-lg-3 card" },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: this.props.element.imageUrl }),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: this.props.element.image_uri }),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "div",
                     { className: "form-group" },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         "button",
-                        { type: "submit", className: "btn btn-primary", onClick: this.addCard },
+                        { type: "submit",
+                            className: "btn btn-primary",
+                            onClick: this.addCard
+                        },
                         "Add Card"
                     )
                 )
@@ -54160,52 +54174,56 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var SearchBar = function (_React$Component) {
-  _inherits(SearchBar, _React$Component);
+    _inherits(SearchBar, _React$Component);
 
-  function SearchBar() {
-    _classCallCheck(this, SearchBar);
+    function SearchBar() {
+        _classCallCheck(this, SearchBar);
 
-    var _this = _possibleConstructorReturn(this, (SearchBar.__proto__ || Object.getPrototypeOf(SearchBar)).call(this));
+        var _this = _possibleConstructorReturn(this, (SearchBar.__proto__ || Object.getPrototypeOf(SearchBar)).call(this));
 
-    _this.state = { value: '' };
+        _this.state = { value: 'brainstorm' };
 
-    _this.handleChange = _this.handleChange.bind(_this);
-    _this.searchSubmit = _this.searchSubmit.bind(_this);
-    return _this;
-  }
-
-  _createClass(SearchBar, [{
-    key: 'handleChange',
-    value: function handleChange(event) {
-      this.setState({ value: event.target.value });
+        _this.handleChange = _this.handleChange.bind(_this);
+        _this.searchSubmit = _this.searchSubmit.bind(_this);
+        return _this;
     }
-  }, {
-    key: 'searchSubmit',
-    value: function searchSubmit(e) {
-      e.preventDefault();
-      this.props.cardSearch(this.state.value);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'div',
-        { className: 'search row col-md-12' },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'form',
-          { onSubmit: this.searchSubmit },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', value: this.state.value, onChange: this.handleChange, required: true }),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'button',
-            { type: 'submit' },
-            'Search'
-          )
-        )
-      );
-    }
-  }]);
 
-  return SearchBar;
+    _createClass(SearchBar, [{
+        key: 'handleChange',
+        value: function handleChange(event) {
+            this.setState({ value: event.target.value });
+        }
+    }, {
+        key: 'searchSubmit',
+        value: function searchSubmit(e) {
+            e.preventDefault();
+            this.props.cardSearch(this.state.value);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                { className: 'search row col-md-12' },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'form',
+                    { onSubmit: this.searchSubmit },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text',
+                        value: this.state.value,
+                        onChange: this.handleChange,
+                        required: true
+                    }),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'button',
+                        { type: 'submit' },
+                        'Search'
+                    )
+                )
+            );
+        }
+    }]);
+
+    return SearchBar;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["a"] = (SearchBar);
