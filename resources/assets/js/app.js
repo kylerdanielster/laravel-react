@@ -64,7 +64,7 @@ class App extends React.Component {
         };
     }
 
-    //TODO: Will need to load cube initial state
+    //TODO: Will need to load cube initial state, again axios or fetch?
     // componentDidMount() {
     //     fetch('/api/cube')
     //         .then(response => {
@@ -78,7 +78,7 @@ class App extends React.Component {
     //TODO: call search API endpoint and update results in state
     cardSearchAPI(name){
         console.log(name);
-        // const url = `https://api.scryfall.com/cards/named?fuzzy=${name.replace(/\s/g, '+')}`;
+        //const url = `https://api.scryfall.com/cards/named?fuzzy=${name.replace(/\s/g, '+')}`;
 
         //TODO: axios or fetch? axios seems like the more common/better choice
 
@@ -96,11 +96,11 @@ class App extends React.Component {
     }
 
     addToCube(card){
-        console.log('added');
+        console.log(card + ' added');
     }
 
     removeFromCube(card){
-        console.log('removed');
+        console.log(card + ' removed');
     }
 
     // could pass 'this.state.results' to CubeList to see how the component looks when populated

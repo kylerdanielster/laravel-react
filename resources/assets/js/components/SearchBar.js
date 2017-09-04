@@ -22,8 +22,8 @@ class SearchBar extends React.Component {
     return (
         <div className="search row col-md-12">
           <form onSubmit={this.searchSubmit}>
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
-            <button>Search</button>
+            <input type="text" value={this.state.value} onChange={this.handleChange} required />
+            <button type="submit" >Search</button>
           </form>
         </div>
     );

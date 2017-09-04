@@ -10485,7 +10485,7 @@ var App = function (_React$Component) {
         return _this;
     }
 
-    //TODO: Will need to load cube initial state
+    //TODO: Will need to load cube initial state, again axios or fetch?
     // componentDidMount() {
     //     fetch('/api/cube')
     //         .then(response => {
@@ -10503,7 +10503,7 @@ var App = function (_React$Component) {
         key: 'cardSearchAPI',
         value: function cardSearchAPI(name) {
             console.log(name);
-            // const url = `https://api.scryfall.com/cards/named?fuzzy=${name.replace(/\s/g, '+')}`;
+            //const url = `https://api.scryfall.com/cards/named?fuzzy=${name.replace(/\s/g, '+')}`;
 
             //TODO: axios or fetch? axios seems like the more common/better choice
 
@@ -10522,12 +10522,12 @@ var App = function (_React$Component) {
     }, {
         key: 'addToCube',
         value: function addToCube(card) {
-            console.log('added');
+            console.log(card + ' added');
         }
     }, {
         key: 'removeFromCube',
         value: function removeFromCube(card) {
-            console.log('removed');
+            console.log(card + ' removed');
         }
 
         // could pass 'this.state.results' to CubeList to see how the component looks when populated
@@ -53964,7 +53964,7 @@ var CubeCard = function (_React$Component) {
         value: function removeCard(e) {
             e.preventDefault();
             //console.log('removed');
-            this.props.removeCard();
+            this.props.removeCard(this.props.element.name);
         }
     }, {
         key: "render",
@@ -54002,7 +54002,11 @@ var CubeCard = function (_React$Component) {
                     null,
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         "button",
-                        { type: "submit", className: "btn btn-primary", onClick: this.removeCard },
+                        {
+                            type: "submit",
+                            className: "btn btn-primary",
+                            onClick: this.removeCard
+                        },
                         "Remove Card"
                     )
                 )
@@ -54093,7 +54097,7 @@ var Card = function (_React$Component) {
         value: function addCard(e) {
             e.preventDefault();
             //console.log('added');
-            this.props.addCard();
+            this.props.addCard(this.props.element.name);
         }
     }, {
         key: "render",
@@ -54174,10 +54178,10 @@ var SearchBar = function (_React$Component) {
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'form',
           { onSubmit: this.searchSubmit },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', value: this.state.value, onChange: this.handleChange }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', value: this.state.value, onChange: this.handleChange, required: true }),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
-            null,
+            { type: 'submit' },
             'Search'
           )
         )
