@@ -15,12 +15,12 @@ import Card from './Card';
  you should give each a unique key
 */
 
-// TODO: This is no longer going to be able to be stateless
-// TODO: Can/Should I move the buttons to this level?
+// TODO: This is no longer going to be able to be stateless (wrong?)
+// TODO: Can/Should I move the buttons to this level? (no make child components class components?)
 
 const CardList = (props) => {
   const cardItems = props.results.map((card) => {
-    return <Card key={card.id} element={card} />
+    return <Card addCard={props.addCard} key={card.id} element={card} />
   });
 
   return (

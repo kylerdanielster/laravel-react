@@ -1,16 +1,32 @@
 import React from 'react';
 
-const CubeCard = (card) => {
-    return (
-        <tr>
-            <td>{card.element.id}</td>
-            <td>{card.element.name}</td>
-            <td>Lorem</td>
-            <td>ipsum</td>
-            <td>dolor</td>
-            <td><button className="btn btn-primary">Remove Card</button></td>
-        </tr>
-    )
+class CubeCard extends React.Component {
+    constructor(){
+        super();
+
+        this.removeCard = this.removeCard.bind(this);
+    }
+
+    removeCard(e){
+        e.preventDefault();
+        //console.log('removed');
+        this.props.removeCard();
+    }
+
+    render() {
+        return (
+            <tr>
+                <td>{this.props.element.id}</td>
+                <td>{this.props.element.name}</td>
+                <td>Lorem</td>
+                <td>ipsum</td>
+                <td>dolor</td>
+                <td>
+                    <button type="submit" className="btn btn-primary" onClick={this.removeCard}>Remove Card</button>
+                </td>
+            </tr>
+        )
+    }
 };
 
 export default CubeCard;

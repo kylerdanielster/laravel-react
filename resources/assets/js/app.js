@@ -96,16 +96,21 @@ class App extends React.Component {
     }
 
     addToCube(card){
-        //TODO: add card from results to cube
+        console.log('added');
     }
-    // chould pass 'this.state.results' to CubeList to see how the component looks when populated
+
+    removeFromCube(card){
+        console.log('removed');
+    }
+
+    // could pass 'this.state.results' to CubeList to see how the component looks when populated
     render() {
         return (
             <div className="top">
 
                 <SearchBar cardSearch={this.cardSearchAPI} />
 
-                <CardList addToCube={this.addToCube} cube={this.state.cube} results={this.state.results} />
+                <CardList addCard={this.addToCube} cube={this.state.cube} results={this.state.results} />
 
                 <h2 className="sub-header">Cube</h2>
                 <div className="table-responsive">
@@ -120,7 +125,7 @@ class App extends React.Component {
                         </tr>
                         </thead>
 
-                            <CubeList cube={this.state.cube} />
+                            <CubeList removeCard={this.removeFromCube} cube={this.state.results} />
 
                     </table>
                 </div>
