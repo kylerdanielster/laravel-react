@@ -64,7 +64,7 @@ class App extends React.Component {
                     saved: false
                 }
             ],
-            cube: [] // either poll server to update or update and save to server at the same time.
+            cube: []
         };
     }
 
@@ -99,6 +99,7 @@ class App extends React.Component {
         // });
     }
 
+    // TODO: update database
     addToCube(card){
         console.log(card.name + ' added');
         this.setState(prevState => ({
@@ -106,15 +107,14 @@ class App extends React.Component {
         }));
     }
 
+    // TODO: update database
     removeFromCube(card){
         console.log(card + ' removed');
         this.setState(prevState => ({
             cube: prevState.cube.filter(element => element.name !== card)
         }));
-        console.log(this.state.cube);
     }
 
-    // could pass 'this.state.results' to CubeList to see how the component looks when populated
     render() {
         return (
             <div className="top">
