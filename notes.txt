@@ -166,3 +166,18 @@ Migrating: 2014_10_12_000000_create_users_table
 Migrated:  2014_10_12_000000_create_users_table
 Migrating: 2014_10_12_100000_create_password_resets_table
 Migrated:  2014_10_12_100000_create_password_resets_table
+
+====================================================
+Laravel Notes
+
+Somewhat good references 
+(https://medium.com/@connorleech/create-a-database-model-and-controller-in-laravel-5-3-b3e15218f6ae)
+(https://medium.com/@devlob/creating-apis-in-laravel-5-5-using-api-resources-9850c1b70efb)
+
+**** Note that I -think- creating the model and filling it in first is better
+      (will fill out migration?) but I am following the second tut above
+php artisan make:resource 'Name'
+php artisan make:model 'Name' -mc
+Fill in migration and model
+php artisan make:migration 'create_name_table'
+php artisan migrate
