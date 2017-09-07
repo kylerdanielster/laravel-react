@@ -181,3 +181,12 @@ php artisan make:model 'Name' -mc
 Fill in migration and model
 php artisan make:migration 'create_name_table'
 php artisan migrate
+
+now, we have the model, the controller, the migration, and the resource 
+that will transform the models and model collections into JSON
+
+resource class represents a single model that needs to be transformed into a JSON structure
+
+In api.php
+Route::get('/products/{id}', ''Name'Controller@show');
+http://127.0.0.1:8000/api/name/{...}.
