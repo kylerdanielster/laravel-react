@@ -190,3 +190,16 @@ resource class represents a single model that needs to be transformed into a JSO
 In api.php
 Route::get('/products/{id}', ''Name'Controller@show');
 http://127.0.0.1:8000/api/name/{...}.
+
+We could use a many to many relationship between user and card
+and define the pivot table to be the cube? Is this simpler or more 
+complicated than allowing laravel to create a cube/card pivot table
+
+
+Cube 
+  UserID CardID
+
+Card 
+  Name
+  set_code
+  set_name

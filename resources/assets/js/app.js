@@ -133,8 +133,8 @@ class App extends React.Component {
                             <th>#</th>
                             <th>Name</th>
                             <th>Type</th>
-                            <th>Colors</th>
-                            <th>Casting Cost</th>
+                            <th>Set</th>
+                            <th>Rarity</th>
                         </tr>
                         </thead>
 

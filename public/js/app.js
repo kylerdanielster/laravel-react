@@ -10598,12 +10598,12 @@ var App = function (_React$Component) {
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'th',
                                     null,
-                                    'Colors'
+                                    'Set'
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'th',
                                     null,
-                                    'Casting Cost'
+                                    'Rarity'
                                 )
                             )
                         ),
@@ -53999,7 +53999,7 @@ var CubeCard = function (_React$Component) {
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "td",
                     null,
-                    this.props.element.id
+                    this.props.element.multiverse_id
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "td",
@@ -54009,17 +54009,17 @@ var CubeCard = function (_React$Component) {
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "td",
                     null,
-                    "Lorem"
+                    this.props.element.type_line
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "td",
                     null,
-                    "ipsum"
+                    this.props.element.set_name
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "td",
                     null,
-                    "dolor"
+                    this.props.element.rarity
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "td",
@@ -54132,7 +54132,7 @@ var Card = function (_React$Component) {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 "div",
                 { className: "col-sm-6 col-md-4 col-lg-3 card" },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: this.props.element.image_uri }),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: this.props.element.image_uris.normal }),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "div",
                     { className: "form-group" },

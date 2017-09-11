@@ -15,11 +15,11 @@ class CubeCard extends React.Component {
     render() {
         return (
             <tr>
-                <td>{this.props.element.id}</td>
+                <td>{this.props.element.multiverse_id}</td>
                 <td>{this.props.element.name}</td>
-                <td>Lorem</td>
-                <td>ipsum</td>
-                <td>dolor</td>
+                <td>{this.props.element.type_line}</td>
+                <td>{this.props.element.set_name}</td>
+                <td>{this.props.element.rarity}</td>
                 <td>
                     <button
                         type="submit"
