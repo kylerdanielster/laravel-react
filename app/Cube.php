@@ -8,11 +8,14 @@ class Cube extends Model
 {
     public function cards()
     {
-        return $this->hasMany('App\Card');
+        // It should be noted that if belongsToMany does NOT limit 
+        // the number of entries in the card and cube table, 
+        // it should probibly not be used. Or rework the relationship
+        return $this->belongsToMany(Card::class, 'cube_cards');
     }
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 }

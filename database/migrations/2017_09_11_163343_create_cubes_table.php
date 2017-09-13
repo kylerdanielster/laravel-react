@@ -15,6 +15,11 @@ class CreateCubesTable extends Migration
     {
         Schema::create('cubes', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id');
+            $table->foreign('user_id')->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+            $table->string('cube_name');
             $table->timestamps();
         });
     }

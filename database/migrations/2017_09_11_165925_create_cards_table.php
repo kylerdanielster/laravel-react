@@ -15,6 +15,9 @@ class CreateCardsTable extends Migration
     {
         Schema::create('cards', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('multiverse_id')->unique();
+            $table->string('name');
+            $table->string('set');
             $table->timestamps();
         });
     }
