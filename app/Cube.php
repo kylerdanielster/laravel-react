@@ -6,6 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cube extends Model
 {
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+     protected $guarded = ['id'];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+     protected $fillable = [
+        'cube_name', 'user_id'
+    ];
+
     public function cards()
     {
         // It should be noted that if belongsToMany does NOT limit 
