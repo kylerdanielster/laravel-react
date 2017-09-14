@@ -14,6 +14,7 @@ class CreateCardsTable extends Migration
     public function up()
     {
         Schema::create('cards', function (Blueprint $table) {
+            // maybe image url
             $table->increments('id');
             $table->integer('multiverse_id')->unique();
             $table->string('name');

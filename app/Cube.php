@@ -22,6 +22,14 @@ class Cube extends Model
         'cube_name', 'user_id'
     ];
 
+    // Assign (the method is 'attatch(*value or model)') cards to the cube 
+    // using the pivot_table 'cube_cards'
+    // If I understand correctly, Cube->CardElement->attatch(card) or detatch(card)
+    // something like that
+    // So their will be cubes and cards and attaching them creates
+    // the relationship in the pivot table
+    // Will need to make sure my database calls are not n+1 
+
     public function cards()
     {
         // It should be noted that if belongsToMany does NOT limit 
