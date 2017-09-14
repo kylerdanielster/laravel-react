@@ -23,3 +23,20 @@ $factory->define(App\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Cube::class, function (Faker $faker) {
+    return [
+        'cube_name' => $faker->name,
+        'user_id' => function () {
+            return factory('App\User')->create()->id;
+        }
+    ];
+});
+
+$factory->define(App\Card::class, function (Faker $faker) {
+    return [
+        'name' => $faker->name,
+        'set' => $faker->name,
+        'multiverse_id' => random_int(1000, 9999),
+    ];
+});
