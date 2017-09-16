@@ -25,10 +25,13 @@ class Cube extends Model
     // Assign (the method is 'attatch(*value or model)') cards to the cube 
     // using the pivot_table 'cube_cards'
     // If I understand correctly, Cube->CardElement->attatch(card) or detatch(card)
-    // something like that
-    // So their will be cubes and cards and attaching them creates
+    // $cube = App\Cube::first(); find a cube
+    // $card = App\Card::where([ (name/id) ], 'brainstorm/1234')->first(); find a card
+    // $cube->cards()->attach($card[->id]); Create the relationship on the pivot table
+    // So their will be cubes and cards and attaching/detaching them creates deletes
     // the relationship in the pivot table
-    // Will need to make sure my database calls are not n+1 
+    // Will need to make sure my database calls are not n+1. This should fo it
+    // App\Cube::with('cards')->get();
 
     public function cards()
     {

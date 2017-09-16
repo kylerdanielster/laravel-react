@@ -11,29 +11,29 @@ class CubeController extends Controller
         return Cube::all();
     }
  
-    public function show($id)
+    public function show(Cube $cube)
     {
-        return Cube::find($id);
+        return $cube;
     }
 
     public function store(Request $request)
     {
-        return Cube::create($request->all());
+        $cube = Cube::create($request->all());
+
+        return response()->json($cube, 201);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Cube $cube)
     {
-        $article = Cube::findOrFail($id);
-        $article->update($request->all());
+        $cube->update($request->all());
 
-        return $article;
+        return response()->json($cube, 200);
     }
 
-    public function delete(Request $request, $id)
+    public function delete(Cube $cube)
     {
-        $article = Cube::findOrFail($id);
-        $article->delete();
+        $cube->delete();
 
-        return 204;
+        return response()->json(null, 204);
     }
 }

@@ -25,5 +25,12 @@ Route::get('/search/{name}', function (Request $request, $name) {
     $response = $client->request('GET',
         'https://api.scryfall.com/cards/named?fuzzy=' . $name);
 
+// Will want to use this to get all versions later
+//    $response = $client->request('GET',
+//        'https://api.scryfall.com/cards/search?q=%2B%2B%21' . " . $name . ");
+
     return $response->getBody();
 });
+
+// Endpoint for adding a card to a cube, using attach?
+//Route::post('/addCard'/

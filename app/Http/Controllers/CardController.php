@@ -23,16 +23,16 @@ class CardController extends Controller
 
     public function update(Request $request, $id)
     {
-        $article = Card::findOrFail($id);
-        $article->update($request->all());
+        $card = Card::findOrFail($id);
+        $card->update($request->all());
 
-        return $article;
+        return $card;
     }
 
     public function delete(Request $request, $id)
     {
-        $article = Card::findOrFail($id);
-        $article->delete();
+        $card = Card::findOrFail($id);
+        $card->delete();
 
         return 204;
     }
