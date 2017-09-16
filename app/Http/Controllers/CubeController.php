@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Cube;
 
 class CubeController extends Controller
 {
-    public function index()
+    // This version with the Cube param may become 
+    // part of a new controller and change to index()
+    public function index(Cube $cube)
     {
-        return Cube::all();
+        return $cube->cards;
+        //return Cube::all();
     }
  
     public function show(Cube $cube)

@@ -18,6 +18,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/cube/cards/{cube}', 'CubeController@index');
+
+//Could set up a custom controller CustomController@cubeCard
+
+Route::get('/cube/card/{card}', 'CardController@index');
+
 // Leaving the request object for now, I may want this to be a post endpoint
 Route::get('/search/{name}', function (Request $request, $name) {
     $client = new GuzzleHttpClient();

@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Card;
 
 class CardController extends Controller
 {
-    public function index()
+    public function index(Card $card)
     {
-        return Card::all();
+        return $card;
+        //return Card::all();
     }
  
     public function show($id)

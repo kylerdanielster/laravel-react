@@ -29,4 +29,11 @@ class Card extends Model
         // it should probibly not be used. Or rework the relationship
         return $this->belongsToMany(Cube::class, 'cube_cards');
     }
+
+    // This changes the route to get by name instead of id
+    // api/cube/cards/Brainstorm - case sensitive
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
 }
