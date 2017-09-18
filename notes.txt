@@ -1,3 +1,5 @@
+NEED TO ADD card name *unique* to pivot table
+
 Doing some rework using es6 and hopefully improving functionality
 New items found in src folder
 

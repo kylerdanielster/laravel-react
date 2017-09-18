@@ -70,14 +70,13 @@ class App extends React.Component {
         };
     }
 
-    //TODO: Will need to load cube initial state for users cube, auth...
-    // componentDidMount() {
-    //     axios.get('api/cube')
-    //         .then(res => {
-    //             console.log(res.data);
-    //             this.setState({ cube: res.cube });
-    //         });
-    // }
+    componentDidMount() {
+         axios.get('api/cube/cards/test1')
+             .then(res => {
+                 console.log(res);
+                 this.setState({ cube: res.data });
+             });
+     }
 
     cardSearchAPI(name){
         console.log(name);

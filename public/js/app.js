@@ -10495,26 +10495,27 @@ var App = function (_React$Component) {
         return _this;
     }
 
-    //TODO: Will need to load cube initial state for users cube, auth...
-    // componentDidMount() {
-    //     axios.get('api/cube')
-    //         .then(res => {
-    //             console.log(res.data);
-    //             this.setState({ cube: res.cube });
-    //         });
-    // }
-
     _createClass(App, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            __WEBPACK_IMPORTED_MODULE_5_axios___default.a.get('api/cube/cards/test1').then(function (res) {
+                console.log(res);
+                _this2.setState({ cube: res.data });
+            });
+        }
+    }, {
         key: 'cardSearchAPI',
         value: function cardSearchAPI(name) {
-            var _this2 = this;
+            var _this3 = this;
 
             console.log(name);
             var val = name.replace(/\s/g, '+');
 
             __WEBPACK_IMPORTED_MODULE_5_axios___default.a.get('api/search/' + val).then(function (res) {
                 console.log(res.data);
-                _this2.setState({ results: res.data });
+                _this3.setState({ results: res.data });
             });
         }
 

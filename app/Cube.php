@@ -45,4 +45,10 @@ class Cube extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    // api/cube/cards/{name} returns list of cards for named cube
+    public function getRouteKeyName()
+    {
+        return 'cube_name';
+    }
 }
