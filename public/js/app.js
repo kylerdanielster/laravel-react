@@ -10488,8 +10488,7 @@ var App = function (_React$Component) {
         value: function componentDidMount() {
             var _this2 = this;
 
-            __WEBPACK_IMPORTED_MODULE_5_axios___default.a.get('api/cube/cards/test1').then(function (res) {
-                console.log(res);
+            __WEBPACK_IMPORTED_MODULE_5_axios___default.a.get('api/cube/test1/cards').then(function (res) {
                 _this2.setState({ cube: res.data });
             });
         }
@@ -10502,8 +10501,7 @@ var App = function (_React$Component) {
             var val = name.replace(/\s/g, '+');
 
             __WEBPACK_IMPORTED_MODULE_5_axios___default.a.get('api/search/' + val).then(function (res) {
-                console.log(res.data);
-                _this3.setState({ results: res.data });
+                _this3.setState({ results: res.data.data });
             });
         }
 
@@ -10542,9 +10540,7 @@ var App = function (_React$Component) {
                 searchResults = '';
             } else {
                 searchResults = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_CardList__["a" /* default */], { addCard: this.addToCube,
-                    cube: this.state.cube,
-                    results: this.state.results
-                });
+                    results: this.state.results });
             }
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -54060,22 +54056,28 @@ var CubeCard = function (_React$Component) {
 */
 
 var CardList = function CardList(props) {
-    // Leaving this for the moment. May need to handle multiple results
+   var cardItems = props.results.map(function (card) {
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Card__["a" /* default */], { addCard: props.addCard,
+         key: card.id,
+         element: card
+      });
+   });
+   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      { className: 'row cards' },
+      ' ',
+      cardItems,
+      ' '
+   );
 
-    // const cardItems = props.results.map((card) => {
-    //   return <Card addCard={props.addCard} key={card.id} element={card} />
-    // });
-    // return ( <div> {cardItems} </div> );
-
-
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'div',
-        { className: 'row cards' },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Card__["a" /* default */], { addCard: props.addCard,
-            key: props.results.id,
-            element: props.results
-        })
-    );
+   // return (
+   //     <div className="row cards">
+   //         <Card addCard={props.addCard}
+   //               key={props.results.id}
+   //               element={props.results}
+   //         />
+   //     </div>
+   // );
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (CardList);

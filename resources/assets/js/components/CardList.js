@@ -16,22 +16,22 @@ import Card from './Card';
 */
 
 const CardList = (props) => {
-    // Leaving this for the moment. May need to handle multiple results
+    const cardItems = props.results.map((card) => {
+       return <Card addCard={props.addCard} 
+                key={card.id} 
+                element={card} 
+             />
+     });
+     return ( <div className="row cards"> {cardItems} </div> );
 
-    // const cardItems = props.results.map((card) => {
-    //   return <Card addCard={props.addCard} key={card.id} element={card} />
-    // });
-    // return ( <div> {cardItems} </div> );
-
-
-    return (
-        <div className="row cards">
-            <Card addCard={props.addCard}
-                  key={props.results.id}
-                  element={props.results}
-            />
-        </div>
-    );
+   // return (
+   //     <div className="row cards">
+   //         <Card addCard={props.addCard}
+   //               key={props.results.id}
+   //               element={props.results}
+   //         />
+   //     </div>
+   // );
 };
 
 export default CardList;

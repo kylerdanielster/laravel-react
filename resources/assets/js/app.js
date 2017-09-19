@@ -58,9 +58,8 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-         axios.get('api/cube/cards/test1')
+         axios.get('api/cube/test1/cards')
              .then(res => {
-                 console.log(res);
                  this.setState({ cube: res.data });
              });
      }
@@ -71,8 +70,7 @@ class App extends React.Component {
 
         axios.get('api/search/' + val)
             .then(res => {
-                console.log(res.data);
-                this.setState({ results: res.data });
+                this.setState({ results: res.data.data });
             });
     }
 
@@ -99,9 +97,7 @@ class App extends React.Component {
 
         } else {
             searchResults = <CardList addCard={this.addToCube}
-                        cube={this.state.cube}
-                        results={this.state.results}
-                        />;
+                        results={this.state.results} />;
         }
 
         return (
