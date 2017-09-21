@@ -10510,7 +10510,17 @@ var App = function (_React$Component) {
     }, {
         key: 'addToCube',
         value: function addToCube(card) {
-            console.log(card.name + ' added');
+            console.log('Card Added');
+            console.log(card);
+            __WEBPACK_IMPORTED_MODULE_5_axios___default.a.post('/api/add/card/test1', {
+                name: 'name',
+                set: 'set',
+                multiverse_id: 'multiverse_id'
+            }).then(function (response) {
+                console.log(response);
+            }).catch(function (error) {
+                console.log(error);
+            });
             this.setState(function (prevState) {
                 return {
                     cube: prevState.cube.concat(card)

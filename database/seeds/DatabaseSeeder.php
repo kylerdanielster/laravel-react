@@ -13,12 +13,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // Uncomment and run some # of times (for loop) to re seed db
-        // $this->call(UsersTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
         // $this->call(App\Cube::class);
         // $this->call(App\Card::class);
         
         $cubeIds = App\Cube::pluck('id')->all();
-
+        $cardName = App\Card::pluck('name');
         $cardIds = App\Card::pluck('id')->all();
 
         foreach($cubeIds as $id) {

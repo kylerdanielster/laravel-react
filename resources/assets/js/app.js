@@ -76,7 +76,19 @@ class App extends React.Component {
 
     // TODO: update database
     addToCube(card){
-        console.log(card.name + ' added');
+        console.log('Card Added');
+        console.log(card);
+        axios.post('/api/add/card/test1', {
+            name: 'name',
+            set: 'set',
+            multiverse_id: 'multiverse_id'
+          })
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
         this.setState(prevState => ({
             cube: prevState.cube.concat(card)
         }));

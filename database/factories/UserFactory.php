@@ -26,7 +26,7 @@ $factory->define(App\User::class, function (Faker $faker) {
 
 $factory->define(App\Cube::class, function (Faker $faker) {
     return [
-        'cube_name' => $faker->name,
+        'cube_name' => $faker->word,
         'user_id' => function () {
             return factory('App\User')->create()->id;
         }
@@ -35,8 +35,9 @@ $factory->define(App\Cube::class, function (Faker $faker) {
 
 $factory->define(App\Card::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'set' => $faker->name,
-        'multiverse_id' => random_int(1000, 9999),
+        'name' => $faker->word,
+        'set' => $faker->word,
+        'image_url' => $faker->imageUrl($width = 340, $height = 480),
+        'unique_id' => $faker->uuid
     ];
 });

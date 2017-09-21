@@ -19,6 +19,8 @@ class CreateCubeCardPivotTable extends Migration
              $table->integer('cube_id')->unsigned()->index();
              $table->foreign('cube_id')->references('id')->on('cubes')->onDelete('cascade');
              $table->primary(['card_id', 'cube_id']);
+             $table->string('name');
+             $table->unique('cube_id', 'name');
          });
      }
  
