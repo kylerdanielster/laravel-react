@@ -44,9 +44,11 @@ Route::get('/search/{name}', function ($name) {
 });
 
 // Endpoint for adding a card to a cube, using attach?
-Route::post('/addCard/{cube}/{card}', function(Cube $cube, $card) {
-    //return $card;
+Route::post('/add/card/{cube}', function(Request $request, Cube $cube) {
+    return $request;
     // need to get or create the card in the db then attach the card in the db
-    //$card = Card::where('id', $id)->firstOrCreate();  
+    // get the items for the card off of the request object and pass them
+    // into the firstOrCreate as an array of [key => value pairs]
+    // $card = Card::where('id', $id)->firstOrCreate();  
     return $cube->cards()->attach($card);
 });
