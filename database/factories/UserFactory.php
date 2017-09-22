@@ -37,7 +37,7 @@ $factory->define(App\Card::class, function (Faker $faker) {
     return [
         'name' => $faker->word,
         'set' => $faker->word,
-        'image_url' => $faker->imageUrl($width = 340, $height = 480),
+        'image_url' => $faker->imageUrl($width = 260, $height = 360),
         'unique_id' => $faker->uuid
     ];
 });
