@@ -20,6 +20,7 @@ class CreateCardsTable extends Migration
             $table->string('name');
             $table->string('set');
             $table->timestamps();
+            //$table->renameColumn('image_url', 'image_uri');
         });
     }
 

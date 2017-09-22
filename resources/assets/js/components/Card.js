@@ -14,7 +14,7 @@ class Card extends React.Component {
     render() {
         return (
             <div className="col-sm-6 col-md-4 col-lg-3 card">
-                <img src={this.props.element.image_uris.normal}/>
+                <img src={this.props.element.image_uri}/>
                 <div className="form-group">
                     <button type="submit"
                             className="btn btn-primary"

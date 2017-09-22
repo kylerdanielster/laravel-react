@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/lightbox.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -77,5 +78,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/lightbox.js') }}"></script>
 </body>
 </html>

@@ -10442,42 +10442,8 @@ var App = function (_React$Component) {
         _this.removeFromCube = _this.removeFromCube.bind(_this);
         _this.cardSearchAPI = _this.cardSearchAPI.bind(_this);
 
-        // Going to leave test data for now
         _this.state = {
-            cardView: [
-                // {
-                //     id: 1,
-                //     name: 'Lightning Bolt',
-                //     description: 'Lightning Bolt deals 3 damage to target creature or player.',
-                //     //"photo": "https://img.scryfall.com/cards/small/en/mm2/122.jpg?1496792177",
-                //     imageUrl: 'http://via.placeholder.com/175x250',
-                //     saved: false
-                // },
-                // {
-                //     id: 2,
-                //     name: 'Terminate',
-                //     description: 'Destroy target creature. It can\'t be regenerated.',
-                //     //"photo": "https://img.scryfall.com/cards/small/en/mm3/194.jpg?1501890996",
-                //     imageUrl: 'http://via.placeholder.com/175x250',
-                //     saved: false
-                // },
-                // {
-                //     id: 3,
-                //     name: 'Thoughtseize',
-                //     description: 'Target player reveals his or her hand. You choose a nonland card from it. That player discards that card. You lose 2 life.',
-                //     //"photo": "https://img.scryfall.com/cards/small/en/ths/107.jpg?1497078879",
-                //     imageUrl: 'http://via.placeholder.com/175x250',
-                //     saved: false
-                // },
-                // {
-                //     id: 4,
-                //     name: 'Baneslayer Angel',
-                //     description: 'Flying, first strike, lifelink, protection from Demons and from Dragons.',
-                //     //"photo": "https://img.scryfall.com/cards/small/en/m11/7.jpg?1496454118",
-                //     imageUrl: 'http://via.placeholder.com/175x250',
-                //     saved: false
-                // }
-            ],
+            cardView: [],
             cube: []
         };
         return _this;
@@ -10497,7 +10463,6 @@ var App = function (_React$Component) {
         value: function cardSearchAPI(name) {
             var _this3 = this;
 
-            console.log(name);
             var val = name.replace(/\s/g, '+');
 
             __WEBPACK_IMPORTED_MODULE_5_axios___default.a.get('api/search/' + val).then(function (res) {
@@ -10514,8 +10479,11 @@ var App = function (_React$Component) {
             console.log(card);
             __WEBPACK_IMPORTED_MODULE_5_axios___default.a.post('/api/add/card/test1', {
                 name: 'name',
-                set: 'set'
+                set: 'set',
+                image_uri: 'image_uri',
+                id: 'id'
             }).then(function (response) {
+                console.log('Respnse from api');
                 console.log(response);
             }).catch(function (error) {
                 console.log(error);
@@ -10525,12 +10493,17 @@ var App = function (_React$Component) {
                     cube: prevState.cube.concat(card)
                 };
             });
+            console.log('cardView');
+            console.log(this.state.cardView[this.state.cardView.length - 1]);
+            //this.setState(this.state.cardView[this.state.cardView.length-1].image_url = card.image_uri);
         }
     }, {
         key: 'viewCubeCard',
         value: function viewCubeCard(card) {
             console.log('view card');
             console.log(card);
+
+            //
         }
 
         // TODO: update database
@@ -53990,6 +53963,15 @@ var CubeCard = function (_React$Component) {
             e.preventDefault();
             this.props.viewCard(this.props.element);
         }
+
+        // Placeing this here temporarily
+        //    <button
+        //        type="submit"
+        //        className="btn btn-primary"
+        //        onClick={this.viewCard}
+        //    >View Card</button>
+        // The anchor tag should maybe be a form with a button
+
     }, {
         key: "render",
         value: function render() {
@@ -54028,11 +54010,10 @@ var CubeCard = function (_React$Component) {
                     "td",
                     null,
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        "button",
-                        {
-                            type: "submit",
-                            className: "btn btn-primary",
-                            onClick: this.viewCard
+                        "a",
+                        { href: this.props.element.image_url,
+                            "data-lightbox": this.props.element.name,
+                            "data-title": this.props.element.name
                         },
                         "View Card"
                     )
@@ -54141,7 +54122,7 @@ var Card = function (_React$Component) {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 "div",
                 { className: "col-sm-6 col-md-4 col-lg-3 card" },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: this.props.element.image_uris.normal }),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: this.props.element.image_uri }),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "div",
                     { className: "form-group" },
