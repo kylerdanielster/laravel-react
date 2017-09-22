@@ -16,7 +16,7 @@ import Card from './Card';
 */
 
 const CardList = (props) => {
-    const cardItems = props.results.map((card) => {
+    const cardItems = props.cardView.map((card) => {
        return <Card addCard={props.addCard} 
                 key={card.id} 
                 element={card} 
@@ -27,8 +27,8 @@ const CardList = (props) => {
    // return (
    //     <div className="row cards">
    //         <Card addCard={props.addCard}
-   //               key={props.results.id}
-   //               element={props.results}
+   //               key={props.cardView.id}
+   //               element={props.cardView}
    //         />
    //     </div>
    // );

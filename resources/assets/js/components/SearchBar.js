@@ -3,7 +3,7 @@ import React from 'react';
 class SearchBar extends React.Component {
     constructor() {
         super();
-        this.state = {value: 'brainstorm'};
+        this.state = {value: 'think twice'};
 
         this.handleChange = this.handleChange.bind(this);
         this.searchSubmit = this.searchSubmit.bind(this);

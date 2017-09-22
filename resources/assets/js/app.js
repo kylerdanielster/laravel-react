@@ -19,7 +19,7 @@ class App extends React.Component {
 
         // Going to leave test data for now
         this.state = {
-            results: [
+            cardView: [
                 // {
                 //     id: 1,
                 //     name: 'Lightning Bolt',
@@ -70,7 +70,7 @@ class App extends React.Component {
 
         axios.get('api/search/' + val)
             .then(res => {
-                this.setState({ results: res.data.data });
+                this.setState({ cardView: res.data.data });
             });
     }
 
@@ -80,8 +80,7 @@ class App extends React.Component {
         console.log(card);
         axios.post('/api/add/card/test1', {
             name: 'name',
-            set: 'set',
-            multiverse_id: 'multiverse_id'
+            set: 'set'
           })
           .then(function (response) {
             console.log(response);
@@ -94,6 +93,11 @@ class App extends React.Component {
         }));
     }
 
+    viewCubeCard(card) {
+        console.log('view card');
+        console.log(card);
+    }
+
     // TODO: update database
     removeFromCube(card){
         console.log(card + ' removed');
@@ -103,13 +107,13 @@ class App extends React.Component {
     }
 
     render() {
-        let searchResults;
-        if (this.state.results.length === 0) {
-            searchResults = '';
+        let cardsToView;
+        if (this.state.cardView.length === 0) {
+            cardsToView = '';
 
         } else {
-            searchResults = <CardList addCard={this.addToCube}
-                        results={this.state.results} />;
+            cardsToView = <CardList addCard={this.addToCube}
+                        cardView={this.state.cardView} />;
         }
 
         return (
@@ -117,7 +121,7 @@ class App extends React.Component {
 
                 <SearchBar cardSearch={this.cardSearchAPI} />
 
-                {searchResults}
+                {cardsToView}
 
                 <h2 className="sub-header">Cube</h2>
                 <div className="table-responsive">
@@ -126,13 +130,12 @@ class App extends React.Component {
                         <tr>
                             <th>#</th>
                             <th>Name</th>
-                            <th>Type</th>
                             <th>Set</th>
-                            <th>Rarity</th>
                         </tr>
                         </thead>
 
                             <CubeList removeCard={this.removeFromCube}
+                                      viewCard={this.viewCubeCard}
                                       cube={this.state.cube}
                             />
 

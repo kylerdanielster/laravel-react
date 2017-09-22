@@ -10444,7 +10444,7 @@ var App = function (_React$Component) {
 
         // Going to leave test data for now
         _this.state = {
-            results: [
+            cardView: [
                 // {
                 //     id: 1,
                 //     name: 'Lightning Bolt',
@@ -10501,7 +10501,7 @@ var App = function (_React$Component) {
             var val = name.replace(/\s/g, '+');
 
             __WEBPACK_IMPORTED_MODULE_5_axios___default.a.get('api/search/' + val).then(function (res) {
-                _this3.setState({ results: res.data.data });
+                _this3.setState({ cardView: res.data.data });
             });
         }
 
@@ -10514,8 +10514,7 @@ var App = function (_React$Component) {
             console.log(card);
             __WEBPACK_IMPORTED_MODULE_5_axios___default.a.post('/api/add/card/test1', {
                 name: 'name',
-                set: 'set',
-                multiverse_id: 'multiverse_id'
+                set: 'set'
             }).then(function (response) {
                 console.log(response);
             }).catch(function (error) {
@@ -10526,6 +10525,12 @@ var App = function (_React$Component) {
                     cube: prevState.cube.concat(card)
                 };
             });
+        }
+    }, {
+        key: 'viewCubeCard',
+        value: function viewCubeCard(card) {
+            console.log('view card');
+            console.log(card);
         }
 
         // TODO: update database
@@ -10545,19 +10550,19 @@ var App = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            var searchResults = void 0;
-            if (this.state.results.length === 0) {
-                searchResults = '';
+            var cardsToView = void 0;
+            if (this.state.cardView.length === 0) {
+                cardsToView = '';
             } else {
-                searchResults = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_CardList__["a" /* default */], { addCard: this.addToCube,
-                    results: this.state.results });
+                cardsToView = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_CardList__["a" /* default */], { addCard: this.addToCube,
+                    cardView: this.state.cardView });
             }
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 { className: 'top' },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_SearchBar__["a" /* default */], { cardSearch: this.cardSearchAPI }),
-                searchResults,
+                cardsToView,
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'h2',
                     { className: 'sub-header' },
@@ -10588,21 +10593,12 @@ var App = function (_React$Component) {
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'th',
                                     null,
-                                    'Type'
-                                ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    'th',
-                                    null,
                                     'Set'
-                                ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    'th',
-                                    null,
-                                    'Rarity'
                                 )
                             )
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_CubeList__["a" /* default */], { removeCard: this.removeFromCube,
+                            viewCard: this.viewCubeCard,
                             cube: this.state.cube
                         })
                     )
@@ -53934,10 +53930,12 @@ module.exports = ReactDOMInvalidARIAHook;
 
 
 var CubeList = function CubeList(props) {
-    var cardItems = props.cube.map(function (card) {
+    var cardItems = props.cube.map(function (card, index) {
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__CubeCard__["a" /* default */], { removeCard: props.removeCard,
+            viewCard: props.viewCard,
             key: card.id,
-            element: card
+            element: card,
+            count: index + 1
         });
     });
 
@@ -53976,6 +53974,7 @@ var CubeCard = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (CubeCard.__proto__ || Object.getPrototypeOf(CubeCard)).call(this));
 
         _this.removeCard = _this.removeCard.bind(_this);
+        _this.viewCard = _this.viewCard.bind(_this);
         return _this;
     }
 
@@ -53986,6 +53985,12 @@ var CubeCard = function (_React$Component) {
             this.props.removeCard(this.props.element.name);
         }
     }, {
+        key: "viewCard",
+        value: function viewCard(e) {
+            e.preventDefault();
+            this.props.viewCard(this.props.element);
+        }
+    }, {
         key: "render",
         value: function render() {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -53994,7 +53999,7 @@ var CubeCard = function (_React$Component) {
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "td",
                     null,
-                    this.props.element.multiverse_id
+                    this.props.count
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "td",
@@ -54004,17 +54009,7 @@ var CubeCard = function (_React$Component) {
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "td",
                     null,
-                    this.props.element.type_line
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "td",
-                    null,
-                    this.props.element.set_name
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "td",
-                    null,
-                    this.props.element.rarity
+                    this.props.element.set
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "td",
@@ -54027,6 +54022,19 @@ var CubeCard = function (_React$Component) {
                             onClick: this.removeCard
                         },
                         "Remove Card"
+                    )
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "td",
+                    null,
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "button",
+                        {
+                            type: "submit",
+                            className: "btn btn-primary",
+                            onClick: this.viewCard
+                        },
+                        "View Card"
                     )
                 )
             );
@@ -54066,7 +54074,7 @@ var CubeCard = function (_React$Component) {
 */
 
 var CardList = function CardList(props) {
-   var cardItems = props.results.map(function (card) {
+   var cardItems = props.cardView.map(function (card) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Card__["a" /* default */], { addCard: props.addCard,
          key: card.id,
          element: card
@@ -54083,8 +54091,8 @@ var CardList = function CardList(props) {
    // return (
    //     <div className="row cards">
    //         <Card addCard={props.addCard}
-   //               key={props.results.id}
-   //               element={props.results}
+   //               key={props.cardView.id}
+   //               element={props.cardView}
    //         />
    //     </div>
    // );
@@ -54182,7 +54190,7 @@ var SearchBar = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (SearchBar.__proto__ || Object.getPrototypeOf(SearchBar)).call(this));
 
-        _this.state = { value: 'brainstorm' };
+        _this.state = { value: 'think twice' };
 
         _this.handleChange = _this.handleChange.bind(_this);
         _this.searchSubmit = _this.searchSubmit.bind(_this);
