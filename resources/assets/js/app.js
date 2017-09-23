@@ -41,8 +41,8 @@ class App extends React.Component {
 
     // TODO: update database
     addToCube(card){
-        console.log('Card Added');
-        console.log(card);
+        let self = this;
+        console.log(card.name + ' added');
         axios.post('/api/add/card/test1', {
             name: 'name',
             set: 'set',
@@ -50,25 +50,31 @@ class App extends React.Component {
             id: 'id'
           })
           .then(function (response) {
-            console.log('Respnse from api');
-            console.log(response);
+              console.log('Respnse from api ' + response.status);
+              self.setState(prevState => ({
+                  cube: prevState.cube.concat(card)
+              }));  
           })
           .catch(function (error) {
             console.log(error);
           });
-        this.setState(prevState => ({
-            cube: prevState.cube.concat(card)
-        }));
-        console.log('cardView');
-        console.log(this.state.cardView[this.state.cardView.length-1]);
     }
 
     // TODO: update database
-    removeFromCube(card){
-        console.log(card + ' removed');
-        this.setState(prevState => ({
-            cube: prevState.cube.filter(element => element.name !== card)
-        }));
+    removeFromCube(cardName){
+        let self = this;
+        console.log(cardName + ' removed');
+        axios.post('/api/remove/card/test1', {name: cardName })
+            .then(function (response) {
+                console.log('Response from api ' + response.status);
+                self.setState(prevState => ({
+                    cube: prevState.cube.filter(element => 
+                        element.name !== cardName)
+                }));
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     render() {
