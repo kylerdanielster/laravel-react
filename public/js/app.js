@@ -10470,7 +10470,7 @@ var App = function (_React$Component) {
             });
         }
 
-        // TODO: update database
+        // TODO: append cube name to api endpoint
 
     }, {
         key: 'addToCube',
@@ -10494,7 +10494,7 @@ var App = function (_React$Component) {
             });
         }
 
-        // TODO: update database
+        // TODO: append cube name to api endpoint
 
     }, {
         key: 'removeFromCube',

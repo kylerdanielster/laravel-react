@@ -39,7 +39,7 @@ class App extends React.Component {
             });
     }
 
-    // TODO: update database
+    // TODO: append cube name to api endpoint
     addToCube(card){
         let self = this;
         console.log(card.name + ' added');
@@ -60,7 +60,7 @@ class App extends React.Component {
           });
     }
 
-    // TODO: update database
+    // TODO: append cube name to api endpoint
     removeFromCube(cardName){
         let self = this;
         console.log(cardName + ' removed');
