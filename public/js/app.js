@@ -10441,6 +10441,7 @@ var App = function (_React$Component) {
         _this.addToCube = _this.addToCube.bind(_this);
         _this.removeFromCube = _this.removeFromCube.bind(_this);
         _this.cardSearchAPI = _this.cardSearchAPI.bind(_this);
+        _this.cardsToView = _this.cardsToView.bind(_this);
 
         _this.state = {
             cardView: [],
@@ -10457,6 +10458,16 @@ var App = function (_React$Component) {
             __WEBPACK_IMPORTED_MODULE_5_axios___default.a.get('api/cube/test1/cards').then(function (res) {
                 _this2.setState({ cube: res.data });
             });
+        }
+    }, {
+        key: 'cardsToView',
+        value: function cardsToView() {
+            if (this.state.cardView.length === 0) {
+                return '';
+            } else {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_CardList__["a" /* default */], { addCard: this.addToCube,
+                    cardView: this.state.cardView });
+            }
         }
     }, {
         key: 'cardSearchAPI',
@@ -10517,19 +10528,11 @@ var App = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            var cardsToView = void 0;
-            if (this.state.cardView.length === 0) {
-                cardsToView = '';
-            } else {
-                cardsToView = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_CardList__["a" /* default */], { addCard: this.addToCube,
-                    cardView: this.state.cardView });
-            }
-
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 { className: 'top' },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_SearchBar__["a" /* default */], { cardSearch: this.cardSearchAPI }),
-                cardsToView,
+                this.cardsToView(),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'h2',
                     { className: 'sub-header' },

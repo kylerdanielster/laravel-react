@@ -16,6 +16,7 @@ class App extends React.Component {
         this.addToCube = this.addToCube.bind(this);
         this.removeFromCube = this.removeFromCube.bind(this);
         this.cardSearchAPI = this.cardSearchAPI.bind(this);
+        this.cardsToView = this.cardsToView.bind(this);
 
         this.state = {
             cardView: [],
@@ -29,6 +30,16 @@ class App extends React.Component {
                  this.setState({ cube: res.data });
              });
      }
+
+    cardsToView() {
+        if (this.state.cardView.length === 0) {
+            return '';
+
+        } else {
+            return ( <CardList addCard={this.addToCube}
+                        cardView={this.state.cardView} /> );
+        }
+    }
 
     cardSearchAPI(name){
         const val = name.replace(/\s/g, '+');
@@ -78,21 +89,12 @@ class App extends React.Component {
     }
 
     render() {
-        let cardsToView;
-        if (this.state.cardView.length === 0) {
-            cardsToView = '';
-
-        } else {
-            cardsToView = <CardList addCard={this.addToCube}
-                        cardView={this.state.cardView} />;
-        }
-
         return (
             <div className="top">
 
                 <SearchBar cardSearch={this.cardSearchAPI} />
 
-                {cardsToView}
+                {this.cardsToView()}
 
                 <h2 className="sub-header">Cube</h2>
                 <div className="table-responsive">
