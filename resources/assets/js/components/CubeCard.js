@@ -30,6 +30,7 @@ class CubeCard extends React.Component {
                     <a href={this.props.element.image_uri}
                         data-lightbox={this.props.element.name}
                         data-title={this.props.element.name}
+                        className="btn btn-primary" role="button"
                     >View Card</a>
                 </td>
             </tr>
