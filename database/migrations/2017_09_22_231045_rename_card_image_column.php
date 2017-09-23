@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCardsTable extends Migration
+class RenameCardImageColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class CreateCardsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cards', function (Blueprint $table) {
-            $table->increments('id');
-            $table->uuid('unique_id');
-            $table->string('image_url');
-            $table->string('name');
-            $table->string('set');
-            $table->timestamps();
+        Schema::table('cards', function(Blueprint $table) {
+            $table->renameColumn('image_url', 'image_uri');
         });
     }
 
@@ -30,6 +25,8 @@ class CreateCardsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cards');
+        Schema::table('cards', function(Blueprint $table) {
+            $table->renameColumn('image_uri', 'image_url');
+        });
     }
 }

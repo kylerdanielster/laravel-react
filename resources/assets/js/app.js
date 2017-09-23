@@ -61,14 +61,6 @@ class App extends React.Component {
         }));
         console.log('cardView');
         console.log(this.state.cardView[this.state.cardView.length-1]);
-        //this.setState(this.state.cardView[this.state.cardView.length-1].image_url = card.image_uri);
-    }
-
-    viewCubeCard(card) {
-        console.log('view card');
-        console.log(card);
-
-        //
     }
 
     // TODO: update database

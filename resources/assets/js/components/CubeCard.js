@@ -5,7 +5,6 @@ class CubeCard extends React.Component {
         super();
 
         this.removeCard = this.removeCard.bind(this);
-        this.viewCard = this.viewCard.bind(this);
     }
 
     removeCard(e){
@@ -13,17 +12,6 @@ class CubeCard extends React.Component {
         this.props.removeCard(this.props.element.name);
     }
 
-    viewCard(e){
-        e.preventDefault();
-        this.props.viewCard(this.props.element);
-    }
-
-    // Placeing this here temporarily
-                //    <button
-                //        type="submit"
-                //        className="btn btn-primary"
-                //        onClick={this.viewCard}
-                //    >View Card</button>
     // The anchor tag should maybe be a form with a button
    render() {
         return (
@@ -39,7 +27,7 @@ class CubeCard extends React.Component {
                     >Remove Card</button>
                 </td>
                 <td>
-                    <a href={this.props.element.image_url}
+                    <a href={this.props.element.image_uri}
                         data-lightbox={this.props.element.name}
                         data-title={this.props.element.name}
                     >View Card</a>

@@ -10495,15 +10495,6 @@ var App = function (_React$Component) {
             });
             console.log('cardView');
             console.log(this.state.cardView[this.state.cardView.length - 1]);
-            //this.setState(this.state.cardView[this.state.cardView.length-1].image_url = card.image_uri);
-        }
-    }, {
-        key: 'viewCubeCard',
-        value: function viewCubeCard(card) {
-            console.log('view card');
-            console.log(card);
-
-            //
         }
 
         // TODO: update database
@@ -53905,7 +53896,6 @@ module.exports = ReactDOMInvalidARIAHook;
 var CubeList = function CubeList(props) {
     var cardItems = props.cube.map(function (card, index) {
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__CubeCard__["a" /* default */], { removeCard: props.removeCard,
-            viewCard: props.viewCard,
             key: card.id,
             element: card,
             count: index + 1
@@ -53947,7 +53937,6 @@ var CubeCard = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (CubeCard.__proto__ || Object.getPrototypeOf(CubeCard)).call(this));
 
         _this.removeCard = _this.removeCard.bind(_this);
-        _this.viewCard = _this.viewCard.bind(_this);
         return _this;
     }
 
@@ -53957,19 +53946,7 @@ var CubeCard = function (_React$Component) {
             e.preventDefault();
             this.props.removeCard(this.props.element.name);
         }
-    }, {
-        key: "viewCard",
-        value: function viewCard(e) {
-            e.preventDefault();
-            this.props.viewCard(this.props.element);
-        }
 
-        // Placeing this here temporarily
-        //    <button
-        //        type="submit"
-        //        className="btn btn-primary"
-        //        onClick={this.viewCard}
-        //    >View Card</button>
         // The anchor tag should maybe be a form with a button
 
     }, {
@@ -54011,7 +53988,7 @@ var CubeCard = function (_React$Component) {
                     null,
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         "a",
-                        { href: this.props.element.image_url,
+                        { href: this.props.element.image_uri,
                             "data-lightbox": this.props.element.name,
                             "data-title": this.props.element.name
                         },
