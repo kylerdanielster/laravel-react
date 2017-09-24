@@ -13,8 +13,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // The factor commands can be run from tinker
-        // First register a user (may only need 1), then
-        factory('App\Cube', 10)->create(); //creates users too
+        // This will register 10 users and assign each a cube
+        factory('App\Cube', 10)->create(); 
         // then create a cube manually for that user, then
         factory('App\Card', 500)->create();
         
