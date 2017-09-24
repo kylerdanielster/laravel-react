@@ -24,6 +24,7 @@ class App extends React.Component {
         };
     }
 
+    // TODO: This should load the logged in users cube/cubes
     componentDidMount() {
          axios.get('api/cube/test1/cards')
              .then(res => {
@@ -55,19 +56,19 @@ class App extends React.Component {
         let self = this;
         console.log(card.name + ' added');
         axios.post('/api/add/card/test1', {
-            name: 'name',
-            set: 'set',
-            image_uri: 'image_uri',
-            id: 'id'
+            name: card.name,
+            set: card.set,
+            image_uri: card.image_uri,
+            unique_id: card.id
           })
           .then(function (response) {
-              console.log('Respnse from api ' + response.status);
+              console.log('Add Respnse from api ' + response.status);
               self.setState(prevState => ({
                   cube: prevState.cube.concat(card)
               }));  
           })
           .catch(function (error) {
-            console.log(error);
+              console.log(error);
           });
     }
 
@@ -77,7 +78,7 @@ class App extends React.Component {
         console.log(cardName + ' removed');
         axios.post('/api/remove/card/test1', {name: cardName })
             .then(function (response) {
-                console.log('Response from api ' + response.status);
+                console.log('Remove Response from api ' + response.status);
                 self.setState(prevState => ({
                     cube: prevState.cube.filter(element => 
                         element.name !== cardName)

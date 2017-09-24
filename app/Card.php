@@ -19,7 +19,7 @@ class Card extends Model
      * @var array
      */
      protected $fillable = [
-        'name', 'set', 'image_url', 'unique_id'
+        'name', 'set', 'image_uri', 'unique_id'
     ];
 
     public function cube()

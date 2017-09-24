@@ -45,20 +45,25 @@ Route::get('/search/{name}', function ($name) {
 
 // Endpoint for adding a card to a cube, using attach?
 Route::post('/add/card/{cube}', function(Request $request, Cube $cube) {
-    return $request;
+    //return $request;
     // need to get or create the card in the db then attach the card in the db
     // get the items for the card off of the request object and pass them
     // into the firstOrCreate as an array of [key => value pairs]
-    // $card = Card::where('id', $id)->firstOrCreate();  
-    return $cube->cards()->attach($card);
+    $card = Card::firstOrCreate(['name' => $request->name, 'set' => $request->set],
+        ['name' => $request->name,
+        'set' => $request->set,
+        'image_uri' => $request->image_uri,
+        'unique_id' => $request->unique_id]
+    );  
+    //return $card;
+    return $cube->cards()->attach($card, ['name' => $card->name]);
 });
 
 // Endpoint for removing a card from a cube, using attach?
 Route::post('/remove/card/{cube}', function(Request $request, Cube $cube) {
-    return $request;
-    // need to get or create the card in the db then attach the card in the db
-    // get the items for the card off of the request object and pass them
-    // into the firstOrCreate as an array of [key => value pairs]
-    // $card = Card::where('id', $id)->firstOrCreate();  
+    //return $request;
+    // Gets the card in the cube 
+    $card = $cube->cards->where('name', $request->name);  
+    //return $card;
     return $cube->cards()->detach($card);
 });

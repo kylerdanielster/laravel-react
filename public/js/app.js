@@ -10450,6 +10450,9 @@ var App = function (_React$Component) {
         return _this;
     }
 
+    // TODO: This should load the logged in users cube/cubes
+
+
     _createClass(App, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
@@ -10489,12 +10492,12 @@ var App = function (_React$Component) {
             var self = this;
             console.log(card.name + ' added');
             __WEBPACK_IMPORTED_MODULE_5_axios___default.a.post('/api/add/card/test1', {
-                name: 'name',
-                set: 'set',
-                image_uri: 'image_uri',
-                id: 'id'
+                name: card.name,
+                set: card.set,
+                image_uri: card.image_uri,
+                unique_id: card.id
             }).then(function (response) {
-                console.log('Respnse from api ' + response.status);
+                console.log('Add Respnse from api ' + response.status);
                 self.setState(function (prevState) {
                     return {
                         cube: prevState.cube.concat(card)
@@ -10513,7 +10516,7 @@ var App = function (_React$Component) {
             var self = this;
             console.log(cardName + ' removed');
             __WEBPACK_IMPORTED_MODULE_5_axios___default.a.post('/api/remove/card/test1', { name: cardName }).then(function (response) {
-                console.log('Response from api ' + response.status);
+                console.log('Remove Response from api ' + response.status);
                 self.setState(function (prevState) {
                     return {
                         cube: prevState.cube.filter(function (element) {
