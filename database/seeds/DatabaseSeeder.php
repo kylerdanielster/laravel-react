@@ -12,17 +12,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // Uncomment and run some # of times (for loop) to re seed db
-        // ...maybe. For now it is better to use tinker
+        // The factor commands can be run from tinker
         // First register a user (may only need 1), then
-        // factory('App\Cube', 10)->create() creates users too
+        factory('App\Cube', 10)->create(); //creates users too
         // then create a cube manually for that user, then
-        // factory('App\Card', 250)->create()
-        //
-        //for ($i=0; $i < 5; $i++)
-        //{
-        //    $this->call(UsersTableSeeder::class);
-        //}
+        factory('App\Card', 500)->create();
         
         // Just here for reference
         //$cardName = App\Card::pluck('name');
@@ -35,7 +29,6 @@ class DatabaseSeeder extends Seeder
             $cards = App\Card::all()->random(5);
             foreach($cards as $card) {
                 DB::table('cube_cards')->insert([
-
                     'cube_id' => $cid,
                     'name' => $card->name,
                     'card_id' => $card->id
