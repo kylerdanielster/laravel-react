@@ -22,7 +22,7 @@ class CubeCard extends React.Component {
                 <td>
                     <button
                         type="submit"
-                        className="btn btn-primary"
+                        className="btn btn-default"
                         onClick={this.removeCard}
                     >Remove Card</button>
                 </td>
@@ -30,7 +30,7 @@ class CubeCard extends React.Component {
                     <a href={this.props.element.image_uri}
                         data-lightbox={this.props.element.name}
                         data-title={this.props.element.name}
-                        className="btn btn-primary" role="button"
+                        className="btn btn-default" role="button"
                     >View Card</a>
                 </td>
             </tr>
